@@ -89,6 +89,11 @@ This workshop will cover:
 2. Install RStudio Desktop [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
 3. Install the R packages listed below.
 4. _OPTIONAL_ if you are still actively enrolled in RSPH, you can also run R and RStudio in the Emory RSPH virtual desktop using Apporto, [https://rsphemory.apporto.com/](https://rsphemory.apporto.com/).
+5. Online BOOKS to get started:
+    1. _Statistical Inference via Data Science: A ModernDive into R and the Tidyverse!_ by Chester Ismay and Albert Y. Kim [https://moderndive.netlify.app/](https://moderndive.netlify.app/).
+    2. _R in Action, Third Edition: Data analysis and graphics with R and Tidyverse_ by Robert I. Kabacoff [https://www.manning.com/books/r-in-action-third-edition](https://www.manning.com/books/r-in-action-third-edition)
+    3. _The Epidemiologist R Handbook_ [https://epirhandbook.com/en/](https://epirhandbook.com/en/)
+
 
 
 # R packages to be used in workshop:
