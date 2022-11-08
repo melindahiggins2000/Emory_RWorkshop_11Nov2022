@@ -83,6 +83,13 @@ This workshop will cover:
 | 15:00 - 16:00 | _Breakout Session 2_ |
 | ------------- | ---------------- |
 
+# Preparation for Workshop
+
+1. Install R [https://cran.r-project.org/](https://cran.r-project.org/)
+2. Install RStudio Desktop [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+3. Install the R packages listed below.
+4. _OPTIONAL_ if you are still actively enrolled in RSPH, you can also run R and RStudio in the Emory RSPH virtual desktop using Apporto, [https://rsphemory.apporto.com/](https://rsphemory.apporto.com/).
+
 
 # R packages to be used in workshop:
 
