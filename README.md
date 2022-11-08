@@ -1,7 +1,7 @@
-# Emory R Workshop: October 26, 2022
+# Emory R Workshop: November 11, 2022
 {:.no_toc}
 
-**R Workshop for Emory Rollins Mobile Health Collaborative**
+**Rollins COVID-19 Epidemiology Fellowship R Training**
 
 -----
 
@@ -30,23 +30,32 @@ This workshop will cover:
 * Module 02
     * Introduction to R packages
     * Loading data, Saving data
-* Module 03:
+* Module 03
     * Data Visualization with `ggplot2` package
 * Module 04
     * Brief Intro Data Wrangling with `dplyr` package
+* Module 05
+    * An introduction to R and RStudio
+    * Learning about R Objects and data structures
+* Module 06
+    * Introduction to R packages
+    * Loading data, Saving data
+* Module 07
+    * Data Visualization with `ggplot2` package
+* Module 08
+    * Brief Intro Data Wrangling with `dplyr` package
 
-* _[time permitting]_ Brief Intro to RMarkdown
 
 # Schedule - links to slides and R scripts
 
-:spiral_calendar: October 22, 2022  
-:alarm_clock:     17:00 - 19:30
+:spiral_calendar: November 11, 2022  
+:alarm_clock:     09:00 - 16:00
 
 
 | Time          | Activity         |
 | :------------ | :--------------- |
-| 05:00 - 05:30 | Module 1 [Slides: [Rworkshop_26Oct2022_Module01](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module01.html)]  [R script: [module01_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module01_Rscript.R)] |
-| 05:30 - 06:00 | Module 2 [Slides: [Rworkshop_26Oct2022_Module02](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module02.html)]  [R script: [module02_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module02_Rscript.R)] |
+| 09:00 - 09:25 | Module 1 [Slides: [Rworkshop_26Oct2022_Module01](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module01.html)]  [R script: [module01_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module01_Rscript.R)] |
+| 09:25 - 09:50 | Module 2 [Slides: [Rworkshop_26Oct2022_Module02](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module02.html)]  [R script: [module02_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module02_Rscript.R)] |
 |               | Files for optional data import/export: |
 |               | * [abalone.csv - CSV format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.csv) |
 |               | * [abalone.RData - R Binary format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.RData) |
@@ -54,9 +63,26 @@ This workshop will cover:
 |               | * [abalone.sav - SPSS format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.sav) |
 |               | * [abalone.xlsx - EXCEL XLSX format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.xlsx) |
 |               | * [abalone dataset at UCI library](https://archive.ics.uci.edu/ml/datasets/Abalone) |
-| 06:00 - 06:30 | _Dinner Break_   |
-| 06:30 - 07:00 | Module 3 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
-| 07:00 - 07:30 | Module 4 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| ------------- | ---------------- |
+| 09:50 - 10:00 | _BIO Break_   |
+| ------------- | ---------------- |
+| 10:00 - 10:30 | Module 3 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
+| 10:30 - 11:00 | Module 4 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| ------------- | ---------------- |
+| 11:00 - 12:00 | _Breakout Session 1_ |
+| 12:00 - 13:00 | **LUNCH BREAK** |
+| ------------- | ---------------- |
+| 13:00 - 13:25 | Module 5 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
+| 13:25 - 13:50 | Module 6 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| ------------- | ---------------- |
+| 13:50 - 14:00 | _BIO Break_   |
+| ------------- | ---------------- |
+| 14:00 - 14:30 | Module 7 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
+| 14:30 - 15:00 | Module 8 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| ------------- | ---------------- |
+| 15:00 - 16:00 | _Breakout Session 2_ |
+| ------------- | ---------------- |
+
 
 # R packages to be used in workshop:
 
@@ -80,7 +106,7 @@ This workshop will cover:
 
 # Workshop Recording
 
-Link to [workshop recording](https://echo360.org/media/f150d92a-43f2-4bc0-8d94-9f8ff9f64a7e/public)
+* _To be added later..._
 
 # Learn more about Rmarkdown at:
 
