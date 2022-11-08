@@ -137,8 +137,9 @@ This workshop will cover:
     * [R for SAS Users - My Datacamp Course](https://www.datacamp.com/courses/r-for-sas-users)
 * [Coursera](https://www.coursera.org/)
     * [Reproducible Templates for Analysis and Dissemination - My Coursera Course](https://www.coursera.org/learn/reproducible-templates-analysis)
-* [Emory N741](https://melindahiggins2000.github.io/N741bigdata/)
-* [Emory N736](https://melindahiggins2000.github.io/N736/)
+* My Emory Courses:
+    * [Emory N741](https://melindahiggins2000.github.io/N741bigdata/)
+    * [Emory N736](https://melindahiggins2000.github.io/N736/)
 * [BOOK: Statistical Inference via Data Science](https://moderndive.com/)
 * [BOOK: The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
 * [BOOK: R Graphics Cookbook, 2nd edition](https://r-graphics.org/) by Winston Chang and associated [R Graphics Cookbook website]( http://www.cookbook-r.com/Graphs/)
