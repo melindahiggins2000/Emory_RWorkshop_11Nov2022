@@ -128,19 +128,21 @@ This workshop will cover:
 * Example Blog [http://jenrichmond.rbind.io/post/2021-08-31-parameterised-penguins/](http://jenrichmond.rbind.io/post/2021-08-31-parameterised-penguins/)
 * Example Document [https://rpubs.com/jenrichmond/adelie](https://rpubs.com/jenrichmond/adelie)
 
-# Places to get help, more info...
+# More R Resources - get help and inspiration
 
 * [RStudio Education](https://education.rstudio.com/)
 * [Quick-R](https://www.statmethods.net/)
-* [BOOK: R in Action](https://www.manning.com/books/r-in-action)
+* [BOOK: R in Action, 3rd ed.](https://www.manning.com/books/r-in-action-third-edition)
 * [Datacamp](https://www.datacamp.com/)
-* [R for SAS Users - My Datacamp Course](https://www.datacamp.com/courses/r-for-sas-users)
+    * [R for SAS Users - My Datacamp Course](https://www.datacamp.com/courses/r-for-sas-users)
 * [Coursera](https://www.coursera.org/)
-* [Reproducible Templates for Analysis and Dissemination - My Coursera Course](https://www.coursera.org/learn/reproducible-templates-analysis)
+    * [Reproducible Templates for Analysis and Dissemination - My Coursera Course](https://www.coursera.org/learn/reproducible-templates-analysis)
 * [Emory N741](https://melindahiggins2000.github.io/N741bigdata/)
 * [Emory N736](https://melindahiggins2000.github.io/N736/)
 * [BOOK: Statistical Inference via Data Science](https://moderndive.com/)
 * [BOOK: The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
+* [BOOK: R Graphics Cookbook, 2nd edition](https://r-graphics.org/) by Winston Chang and associated [R Graphics Cookbook website]( http://www.cookbook-r.com/Graphs/)
+* [The R Graph Gallery](https://r-graph-gallery.com/)
 
 
 
