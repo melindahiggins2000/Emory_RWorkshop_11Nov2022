@@ -1,0 +1,11 @@
+theme: jekyll-theme-minimal
+plugins:
+  - jemoji
+title: Melinda Higgins, PhD
+description: Director of Biostatistics and Data Core - ONR; Research Professor
+markdown: kramdown
+
+# theme: jekyll-theme-minimal
+# title: Melinda Higgins, PhD
+# description: Director of Biostatistics and Data Core - ONR; Research Professor
+# logo: https://assets-global.website-files.com/5f11b12012400490893a64ea/5f11b1201240041bcb3a6700_higgin.jpg

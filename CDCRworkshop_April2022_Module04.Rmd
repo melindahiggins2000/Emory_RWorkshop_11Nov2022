@@ -1,0 +1,627 @@
+---
+title: "Module 04: Data Wrangling with `dplyr`"
+subtitle: "CDC R Workshop April 21-22, 2022"
+author: "[Melinda Higgins](https://melindahiggins.netlify.app/)"
+date: "Director Biostatistics & Data Core </br> School of Nursing - Emory University </br> 04/21/2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "css/middleburymkhCDC.css", "css/middleburymkh-fonts.css", "css/sidecodeplot.css", "hygge", "ninjutsu"]
+    nature:
+      beforeInit: ["midd_xaringan.js"]
+      highlightStyle: gruvbox-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    includes:
+      in_header: "middlebury_header.html"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# For htmltools package, you may set options(htmltools.dir.version = FALSE) to suppress the version number in the subdirectory name.
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+
+library(emo)
+library(fontawesome)
+library(knitr)
+library(dplyr)
+library(flair)
+library(flipbookr)
+library(tidyverse)
+
+library(xaringanExtra)
+xaringanExtra::use_panelset()
+xaringanExtra::use_tile_view()
+```
+
+background-size: 100%
+background-image: url(img/data_cowboy.png)
+background-position: 70% 70%
+class: center, top
+
+# Become a Data Wrangler!
+
+.footnote[
+* Illustrations by Allison Horst, RStudio Artist in Residence, <https://github.com/allisonhorst/stats-illustrations>
+]
+
+---
+
+# What's in My Dataset?
+
+* `str()` see structure of data
+* `head()` and `tail()` functions
+* `names()` list variable names in dataset
+* numerical data - use `summary()`
+* categorical variable or factors - use `table()`
+
+---
+
+# Palmer Penguins Data - Structure
+
+1. Load `palmerpenguins` package
+2. See structure of data
+
+```{r}
+library(palmerpenguins)
+str(penguins)
+```
+
+---
+
+# Palmer Penguins Data - "Peek" at Data
+
+1. See top and bottoms rows of data
+2. Use `head()` function
+
+```{r}
+head(penguins)
+```
+
+Notice we cannot "see" all of the data - some columns hidden? The data is in a `tibble` data "class"
+
+```{r}
+class(penguins)
+```
+
+---
+
+# Look at more rows - bottom 10 rows
+
+Add the number 10 to the `tail()` function.
+
+```{r}
+tail(penguins, 10)
+```
+
+From `help(tail)` page:
+
+```
+## S3 method for class 'function'
+tail(x, n = 6L, ...)
+```
+---
+
+# Convert from a `tibble` to a plain `data.frame`
+
+We can convert this to a plain `data.frame` class and then look at the complete data.
+
+```{r echo=FALSE}
+a <- getOption("width")
+options(width=120)
+```
+
+```{r}
+penguins.df <- data.frame(penguins)
+class(penguins.df)
+head(penguins.df)
+```
+
+```{r echo=FALSE}
+options(width=a)
+```
+
+---
+
+# Get list of variables (column names) in dataset
+
+.left-code[
+
+```{r names, eval=FALSE}
+names(penguins)
+```
+]
+
+.right-plot[
+```{r names-out, ref.label="names", echo=FALSE, out.width="80%"}
+```
+]
+
+---
+
+# Get simple summary stats
+
+.left-code[
+
+```{r stats1, eval=FALSE}
+summary(penguins)
+```
+]
+
+.right-plot[
+```{r stats1-out, ref.label="stats1", echo=FALSE, out.width="80%"}
+```
+]
+
+---
+
+# Simple tables of frequencies
+
+### These examples use `$` to "select" a variable from the `penguins` dataset.
+
+.left-code[
+
+```{r stats2, eval=FALSE}
+table(penguins$species)
+```
+
+```{r stats3, eval=FALSE}
+table(penguins$island)
+```
+
+```{r stats4, eval=FALSE}
+table(penguins$species,
+      penguins$island)
+```
+]
+
+.right-plot[
+```{r stats2-out, ref.label="stats2", echo=FALSE, out.width="80%"}
+```
+```{r stats3-out, ref.label="stats3", echo=FALSE, out.width="80%"}
+```
+```{r stats4-out, ref.label="stats4", echo=FALSE, out.width="80%"}
+```
+
+]
+
+---
+
+# Learn about `dplyr`
+
+```{r out.width ='100%', echo=FALSE}
+knitr::include_url("https://dplyr.tidyverse.org/")
+```
+
+---
+
+# Compare Base R versus `dplyr` approach with pipes `%>%`
+
+```{r out.width ='100%', echo=FALSE}
+knitr::include_url("https://cran.r-project.org/web/packages/dplyr/vignettes/base.html")
+```
+
+---
+
+# Using `dplyr` - functions are verbs
+
+Let's `pull()` out one variable (column) `bill_length_mm` from the `penguins` dataset and then get the `mean()`.
+
+We will use the pipe operator `%>%` from `dplyr` to chain our programming steps together in a logical order.
+
+```{r}
+penguins %>%
+  pull(bill_length_mm) %>%
+  mean()
+```
+
+Try again - add `na.rm=TRUE` option to the `mean()` function find the mean of all of the non-missing (not `NA`) values.
+
+```{r}
+penguins %>%
+  pull(bill_length_mm) %>%
+  mean(na.rm = TRUE)
+```
+
+.footnote[
+Learn more at [https://dplyr.tidyverse.org/](https://dplyr.tidyverse.org/).
+]
+
+---
+
+# The Base R way to do the same thing
+
+```{r}
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+--
+
+This is processed similar to the previous slide, but now we have to look from the inside out. 
+
+--
+
+The `$` operator selects the `bill_length_mm` variable in the `penguins` dataset.
+
+--
+
+This is fed into the `mean()` function as the column vector of data we want to find the mean for.
+
+--
+
+And then we also add the `na.rm = TRUE` option to the `mean()` function.
+
+--
+
+.footnote[I like `dplyr` better. But knowing the base R way is good also.]
+
+---
+
+# Choose more than 1 variable with `select()`
+
+Let's get `summary()` statistics for `body_mass_g` and `flipper_length_mm`
+
+```{r}
+penguins %>%
+  select(body_mass_g, flipper_length_mm) %>%
+  summary()
+```
+
+The `summary()` function is a useful base R function - I just wish it gave you standard deviation!!!
+
+---
+
+# Another "summary" stat function - Hmisc::describe()
+
+```{r echo=FALSE}
+a <- getOption("width")
+options(width=120)
+```
+
+```{r}
+library(Hmisc)
+
+penguins %>%
+  select(body_mass_g, flipper_length_mm) %>%
+  Hmisc::describe()
+```
+
+.footnote[Notice the use of `Hmisc::describe()` - the "describe" function has the same name in both the `Hmisc` and `psych` packages. So we use the syntax `packagename::function()` to avoid confusion.]
+
+```{r echo=FALSE}
+options(width=a)
+```
+
+---
+
+# Also try psych::describe() for summary stats
+
+```{r echo=FALSE}
+a <- getOption("width")
+options(width=120)
+```
+
+```{r}
+library(psych)
+
+penguins %>%
+  select(body_mass_g, flipper_length_mm) %>%
+  psych::describe()
+```
+
+.footnote[Notice the use of `psych::describe()` - the "describe" function has the same name in both the `Hmisc` and `psych` packages. So we use the syntax `packagename::function()` to avoid confusion.]
+
+```{r echo=FALSE}
+options(width=a)
+```
+
+---
+
+# Create custom statistics output
+
+The `summarise()` function from `dplyr` will let you create custom statistical summaries.
+
+```{r}
+penguins %>%
+  select(body_mass_g, flipper_length_mm) %>%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  )
+```
+
+---
+
+# Use `group_by()` to further improve your output
+
+Let's get the same output but now grouped by `species.` Notice we added `species` to the `select()` list of variables.
+
+```{r}
+penguins %>%
+  select(body_mass_g, flipper_length_mm, species) %>%
+  group_by(species) %>% #<<
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  )
+```
+
+---
+
+# Understanding the programming workflow with `%>%`
+
+Another fun built-in dataset is `mtcars`. Here is a quick look at that dataset. Watch the programming workflow on next 2 slides.
+
+```{r}
+head(mtcars, 10)
+```
+
+---
+
+```{r my_mtcars, include = FALSE}
+mtcars %>%
+  select(cyl, mpg, hp) %>%
+  arrange(hp) %>%
+  summarise(meanmpg = mean(mpg),
+            meanhp = mean(hp)) %>%
+  knitr::kable(
+    col.names = c("MPG","HP"),
+    caption = "Means of MPG and HP"
+    )
+```
+
+`r chunk_reveal("my_mtcars")`
+
+---
+
+```{r my_mtcars2, include = FALSE}
+mtcars %>%
+  select(cyl, mpg, hp) %>%
+  arrange(hp) %>%
+  group_by(cyl) %>%
+  summarise(meanmpg = mean(mpg),
+            meanhp = mean(hp)) %>%
+  knitr::kable(
+    col.names = c("CYL","MPG","HP"),
+    caption = "Means of MPG and HP by CYL")
+```
+
+`r chunk_reveal("my_mtcars2")`
+
+---
+
+# Use `knitr::kable()` for pretty output table
+
+Use `knitr::kable()` on any table, data.frame, matrix or tibble to get pretty output.
+
+```{r}
+penguins %>%
+  select(body_mass_g, flipper_length_mm, species) %>%
+  group_by(species) %>%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  ) %>%
+  knitr::kable() #<<
+```
+
+---
+
+# `knitr::kable()` - add better column headings
+
+Use `knitr::kable()` on any table, data.frame, matrix or tibble to get pretty output.
+
+```{r}
+penguins %>%
+  select(body_mass_g, flipper_length_mm, species) %>%
+  group_by(species) %>%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  ) %>%
+  knitr::kable(col.names = c("Species", #<<
+                             "Mean Body Mass (g)", #<<
+                             "SD of Body Mass (g)", #<<
+                             "Mean Flipper Length (mm)", #<<
+                             "SD of Flipper Length (mm)")) #<<
+```
+
+---
+
+```{r out.width = '=100%', echo=FALSE}
+knitr::include_graphics("img/dplyr_across.png")
+```
+
+---
+
+# `dplyr::across()`
+
+```{r}
+penguins %>%
+  dplyr::group_by(species) %>%
+  dplyr::summarize(across(ends_with("mm"), mean, na.rm = TRUE)) %>% #<<
+  knitr::kable()
+```
+
+--
+
+Besides `ends_with()` also explore:
+
+* `starts_with()`
+* `contains()`
+* `matches()`
+* learn more about `tidyselect` package [https://tidyselect.r-lib.org/](https://tidyselect.r-lib.org/) (loaded with `dplyr`)
+
+**NOTE:** The code above added the packagename syntax `dplyr::group_by()` and `dplyr::summarise()` to avoid confusion with `Hmisc::summarize()`.
+
+.footnote[Learn more at [https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome](https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome)]
+
+---
+
+class: left, middle, inverse
+
+# YOUR TURN [ZOOM BREAKOUT 5-10 MIN]
+
+### 1. Open module04_Rscript.R
+### 2. Do EXERCISE 04
+### 3. Do EXERCISE 05
+
+---
+
+```{r out.width = '=100%', echo=FALSE}
+knitr::include_graphics("img/dplyr_filter.jpg")
+```
+
+---
+
+# Using `dplyr::filter()` to select cases (rows)
+
+Get summary statistics for the Chinstrap penguins
+
+```{r echo=FALSE}
+a <- getOption("width")
+options(width=120)
+```
+
+```{r}
+penguins %>%
+  filter(species == "Chinstrap") %>% #<<
+  summary()
+```
+
+```{r echo=FALSE}
+options(width=a)
+```
+
+---
+
+```{r out.width = '75%', echo=FALSE}
+knitr::include_graphics("img/dplyr_mutate.png")
+```
+
+---
+
+# `dplyr::mutate()` to make new variables
+
+The body_mass_g is currently in grams. Let's create a new variable for the mass in kg. Save the updated dataset as `penguins.mod`.
+
+```{r}
+penguins.mod <- penguins %>%
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+penguins.mod %>%
+  select(body_mass_g, body_mass_kg) %>%
+  head()
+  
+```
+
+---
+
+```{r out.width = '75%', echo=FALSE}
+knitr::include_graphics("img/dplyr_case_when.png")
+```
+
+---
+
+# Making categories or recoding - dplyr::case_when()
+
+.pull-left[
+
+```{r tablesize, eval=FALSE}
+# Use case_when() to create
+# three size categories
+penguins_mod <- penguins %>%
+  mutate(size_bin = case_when(
+    body_mass_g > 4500 ~ "large",
+    body_mass_g > 3000 & 
+      body_mass_g <= 4500 ~ "medium",
+    body_mass_g <= 3000 ~ "small"
+    )
+  )
+
+# Create summary table 
+# of size categories
+penguins_mod %>% 
+  pull(size_bin) %>% 
+  table(useNA = "ifany") %>% #<<
+  knitr::kable(
+    col.names = c("Size Category",
+                  "Frequency"))
+```
+
+]
+
+.pull-right[
+
+### Table of Body Size Categories
+
+```{r tablesize-out, ref.label="tablesize", echo=FALSE}
+```
+
+]
+
+.footnote[Notice `useNA = "ifany"` option added to `table()` to print the number of missing `NA`'s]
+
+---
+
+# Make a 2-way table
+
+.pull-left[
+
+```{r table2, eval=FALSE}
+# use with() to "attach"
+# dataset to then use only variable
+# names in table() function
+penguins_mod %>%
+  with(table(species, island))
+```
+
+]
+
+.pull-right[
+
+### Frequency Table of Species by Island
+
+```{r table2-out, ref.label="table2", echo=FALSE}
+```
+]
+
+---
+
+# Quick Table Example - Arsenal Package
+
+```{r results = "asis"}
+library(arsenal)
+
+tab1 <- tableby(island ~ bill_length_mm + bill_depth_mm, 
+                data = penguins)
+summary(tab1)
+```
+
+.footnote[Learn more about the `arsenal` package and `tableby()` function at [https://cran.r-project.org/web/packages/arsenal/vignettes/tableby.html](https://cran.r-project.org/web/packages/arsenal/vignettes/tableby.html).]
+
+---
+
+class: left, middle, inverse
+
+# YOUR TURN [ZOOM BREAKOUT 5-10 MIN]
+
+### 1. Open module04_Rscript.R
+### 2. Do EXERCISE 06
+### 3. Do EXERCISE 07
