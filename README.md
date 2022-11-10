@@ -42,19 +42,19 @@
 See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages". All of the packages on CRAN can be installed inside RStudio by clicking on "Tools/Install Packages" top menu.
 
 * [`tidyverse` website](https://www.tidyverse.org/) on [`tidyverse` on CRAN](https://cran.r-project.org/web/packages/tidyverse/index.html)- which includes:
-    - [`ggplot2`](https://ggplot2.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/ggplot2/)
-    - [`dplyr`](https://dplyr.tidyverse.org/ and on [CRAN](https://cran.r-project.org/web/packages/dplyr/))
-    - [`readr`](https://readr.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readr/)
-    - [`haven`](https://haven.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/haven/) and more packages are included
-* [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) and on [CRAN](https://cran.r-project.org/web/packages/palmerpenguins/))
-* [`patchwork`](https://patchwork.data-imaginist.com/) and on [CRAN](https://cran.r-project.org/web/packages/patchwork/)
-* [`Hmisc`](https://hbiostat.org/R/Hmisc/) and on [CRAN](https://cran.r-project.org/web/packages/Hmisc/)
-* [`psych`](https://personality-project.org/r/psych/) and on [CRAN](https://cran.r-project.org/web/packages/psych/)
-* [`arsenal`](https://mayoverse.github.io/arsenal/) and on [CRAN](https://cran.r-project.org/web/packages/arsenal/)
-* [`readxl`](https://readxl.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readxl/)
+    - [`ggplot2` website](https://ggplot2.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/ggplot2/)
+    - [`dplyr` website](https://dplyr.tidyverse.org/ and on [CRAN](https://cran.r-project.org/web/packages/dplyr/))
+    - [`readr` website](https://readr.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readr/)
+    - [`haven` website](https://haven.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/haven/) and more packages are included
+* [`palmerpenguins` website](https://allisonhorst.github.io/palmerpenguins/) and on [CRAN](https://cran.r-project.org/web/packages/palmerpenguins/)
+* [`patchwork` website](https://patchwork.data-imaginist.com/) and on [CRAN](https://cran.r-project.org/web/packages/patchwork/)
+* [`Hmisc` website](https://hbiostat.org/R/Hmisc/) and on [CRAN](https://cran.r-project.org/web/packages/Hmisc/)
+* [`psych` website](https://personality-project.org/r/psych/) and on [CRAN](https://cran.r-project.org/web/packages/psych/)
+* [`arsenal` website](https://mayoverse.github.io/arsenal/) and on [CRAN](https://cran.r-project.org/web/packages/arsenal/)
+* [`readxl` website](https://readxl.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readxl/)
 * [`foreign` on CRAN](https://cran.r-project.org/web/packages/foreign/)
 * [`ggthemes` on CRAN](https://cran.r-project.org/web/packages/ggthemes/)
-* [`data.table`](https://rdatatable.gitlab.io/data.table/) and on [CRAN](https://cran.r-project.org/web/packages/data.table/)
+* [`data.table` website](https://rdatatable.gitlab.io/data.table/) and on [CRAN](https://cran.r-project.org/web/packages/data.table/)
 
 * _OPTIONAL_ [`ggthemr` on Github](https://github.com/Mikata-Project/ggthemr) - this one is not yet on CRAN and is totally optional to install. For this you will need the `devtools` package which is available on [CRAN](https://cran.r-project.org/web/packages/devtools/). Once you have `devtools` installed, you can optionally install the `ggthemr` package by typing the following command:
 
