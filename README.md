@@ -110,13 +110,6 @@ This workshop will cover (final list in development):
 | :------------ | :--------------- |
 | 09:00 - 09:25 | Module 1 [Slides and R script TBA] |
 | 09:25 - 09:50 | Module 2 [Slides and R script TBA] |
-|               | Files for optional data import/export: |
-|               | * [abalone.csv - CSV format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.csv) |
-|               | * [abalone.RData - R Binary format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.RData) |
-|               | * [abalone.sas7bdat - SAS format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.sas7bdat) |
-|               | * [abalone.sav - SPSS format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.sav) |
-|               | * [abalone.xlsx - EXCEL XLSX format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.xlsx) |
-|               | * [abalone dataset at UCI library](https://archive.ics.uci.edu/ml/datasets/Abalone) |
 | ------------- | ---------------- |
 | 09:50 - 10:00 | _BIO Break_   |
 | ------------- | ---------------- |
