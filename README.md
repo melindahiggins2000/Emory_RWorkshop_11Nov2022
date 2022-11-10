@@ -46,7 +46,7 @@ See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages"
     - [`dplyr`](https://dplyr.tidyverse.org/ and on [CRAN](https://cran.r-project.org/web/packages/dplyr/))
     - [`readr`](https://readr.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readr/)
     - [`haven`](https://haven.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/haven/) and more packages are included
-* [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/ and on [CRAN](https://cran.r-project.org/web/packages/palmerpenguins/))
+* [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) and on [CRAN](https://cran.r-project.org/web/packages/palmerpenguins/))
 * [`patchwork`](https://patchwork.data-imaginist.com/) and on [CRAN](https://cran.r-project.org/web/packages/patchwork/)
 * [`Hmisc`](https://hbiostat.org/R/Hmisc/) and on [CRAN](https://cran.r-project.org/web/packages/Hmisc/)
 * [`psych`](https://personality-project.org/r/psych/) and on [CRAN](https://cran.r-project.org/web/packages/psych/)
