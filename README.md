@@ -65,6 +65,7 @@ See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages"
 * [`ggthemes` on CRAN](https://cran.r-project.org/web/packages/ggthemes/)
 * [`data.table` website](https://rdatatable.gitlab.io/data.table/) and on [CRAN](https://cran.r-project.org/web/packages/data.table/)
 * [`sf` website](https://r-spatial.github.io/sf/) and on [CRAN](https://cran.r-project.org/web/packages/sf/index.html)
+* [`leaflet` website](https://rstudio.github.io/leaflet/) and on [CRAN](https://cran.r-project.org/web/packages/leaflet/index.html)
 
 * _OPTIONAL_ [`ggthemr` on Github](https://github.com/Mikata-Project/ggthemr) - this one is not yet on CRAN and is totally optional to install. For this you will need the `devtools` package which is available on [CRAN](https://cran.r-project.org/web/packages/devtools/). Once you have `devtools` installed, you can optionally install the `ggthemr` package by typing the following command:
 
