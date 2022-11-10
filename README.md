@@ -28,6 +28,15 @@
     * * see instructions on installing R in chapter 1 of [Modern Dive Book](https://moderndive.netlify.app/1-getting-started.html#r-rstudio)
 3. Install the R packages listed below.
     * see instruction on how to install packages at Chapter 1.3.1 in the [Modern Dive Book](https://moderndive.netlify.app/1-getting-started.html#package-installation).
+4. Download datasets and mapfiles:
+    * [abalone.csv - CSV format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.csv)
+    * [abalone.RData - R Binary format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.RData)
+    * [abalone.sas7bdat - SAS format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.sas7bdat)
+    * [abalone.sav - SPSS format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.sav)
+    * [abalone.xlsx - EXCEL XLSX format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.xlsx)
+    * [abalone dataset at UCI library](https://archive.ics.uci.edu/ml/datasets/Abalone)
+    * [Fulton County Map Shapefiles - ZIP file]()
+    * [FALSE GA COVID DATA - EXCEL file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/FALSE%20COVID%20DATA_TRAINING.xlsx)
 
 **OPTIONAL PREP**
 
@@ -37,7 +46,7 @@
     2. _R in Action, Third Edition: Data analysis and graphics with R and Tidyverse_ by Robert I. Kabacoff [https://www.manning.com/books/r-in-action-third-edition](https://www.manning.com/books/r-in-action-third-edition)
     3. _The Epidemiologist R Handbook_ [https://epirhandbook.com/en/](https://epirhandbook.com/en/)
 
-# R packages to be install for workshop:
+# R packages to be installed for workshop:
 
 See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages". All of the packages on CRAN can be installed inside RStudio by clicking on "Tools/Install Packages" top menu.
 
@@ -55,6 +64,7 @@ See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages"
 * [`foreign` on CRAN](https://cran.r-project.org/web/packages/foreign/)
 * [`ggthemes` on CRAN](https://cran.r-project.org/web/packages/ggthemes/)
 * [`data.table` website](https://rdatatable.gitlab.io/data.table/) and on [CRAN](https://cran.r-project.org/web/packages/data.table/)
+* [`sf` website](https://r-spatial.github.io/sf/) and on [CRAN](https://cran.r-project.org/web/packages/sf/index.html)
 
 * _OPTIONAL_ [`ggthemr` on Github](https://github.com/Mikata-Project/ggthemr) - this one is not yet on CRAN and is totally optional to install. For this you will need the `devtools` package which is available on [CRAN](https://cran.r-project.org/web/packages/devtools/). Once you have `devtools` installed, you can optionally install the `ggthemr` package by typing the following command:
 
