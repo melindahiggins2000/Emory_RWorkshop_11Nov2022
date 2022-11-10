@@ -20,30 +20,74 @@
 * TOC 1
 {:toc}
 
+# Preparation for Workshop
+
+1. Install R [https://cran.r-project.org/](https://cran.r-project.org/)
+    * see instructions on installing R in chapter 1 of [Modern Dive Book](https://moderndive.netlify.app/1-getting-started.html#r-rstudio)
+2. Install RStudio Desktop [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+    * * see instructions on installing R in chapter 1 of [Modern Dive Book](https://moderndive.netlify.app/1-getting-started.html#r-rstudio)
+3. Install the R packages listed below.
+    * see instruction on how to install packages at Chapter 1.3.1 in the [Modern Dive Book](https://moderndive.netlify.app/1-getting-started.html#package-installation).
+
+**OPTIONAL PREP**
+
+4. _OPTIONAL_ if you are still actively enrolled in RSPH, you can also run R and RStudio in the Emory RSPH virtual desktop using Apporto, [https://rsphemory.apporto.com/](https://rsphemory.apporto.com/).
+5. Online BOOKS to get started:
+    1. _Statistical Inference via Data Science: A ModernDive into R and the Tidyverse!_ by Chester Ismay and Albert Y. Kim [https://moderndive.netlify.app/](https://moderndive.netlify.app/).
+    2. _R in Action, Third Edition: Data analysis and graphics with R and Tidyverse_ by Robert I. Kabacoff [https://www.manning.com/books/r-in-action-third-edition](https://www.manning.com/books/r-in-action-third-edition)
+    3. _The Epidemiologist R Handbook_ [https://epirhandbook.com/en/](https://epirhandbook.com/en/)
+
+# R packages to be install for workshop:
+
+See packages listed on [CRAN](https://cran.r-project.org/) - click on "Packages". All of the packages on CRAN can be installed inside RStudio by clicking on "Tools/Install Packages" top menu.
+
+* [`tidyverse` website](https://www.tidyverse.org/) on [`tidyverse` on CRAN](https://cran.r-project.org/web/packages/tidyverse/index.html)- which includes:
+    - [`ggplot2`](https://ggplot2.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/ggplot2/)
+    - [`dplyr`](https://dplyr.tidyverse.org/ and on [CRAN](https://cran.r-project.org/web/packages/dplyr/))
+    - [`readr`](https://readr.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readr/)
+    - [`haven`](https://haven.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/haven/) and more packages are included
+* [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/ and on [CRAN](https://cran.r-project.org/web/packages/palmerpenguins/))
+* [`patchwork`](https://patchwork.data-imaginist.com/) and on [CRAN](https://cran.r-project.org/web/packages/patchwork/)
+* [`Hmisc`](https://hbiostat.org/R/Hmisc/) and on [CRAN](https://cran.r-project.org/web/packages/Hmisc/)
+* [`psych`](https://personality-project.org/r/psych/) and on [CRAN](https://cran.r-project.org/web/packages/psych/)
+* [`arsenal`](https://mayoverse.github.io/arsenal/) and on [CRAN](https://cran.r-project.org/web/packages/arsenal/)
+* [`readxl`](https://readxl.tidyverse.org/) and on [CRAN](https://cran.r-project.org/web/packages/readxl/)
+* [`foreign` on CRAN](https://cran.r-project.org/web/packages/foreign/)
+* [`ggthemes` on CRAN](https://cran.r-project.org/web/packages/ggthemes/)
+* [`data.table`](https://rdatatable.gitlab.io/data.table/) and on [CRAN](https://cran.r-project.org/web/packages/data.table/)
+
+* _OPTIONAL_ [`ggthemr` on Github](https://github.com/Mikata-Project/ggthemr) - this one is not yet on CRAN and is totally optional to install. For this you will need the `devtools` package which is available on [CRAN](https://cran.r-project.org/web/packages/devtools/). Once you have `devtools` installed, you can optionally install the `ggthemr` package by typing the following command:
+
+```
+devtools::install_github('Mikata-Project/ggthemr')
+```
+
+
 # Overview of Workshop
 
-This workshop will cover:
+This workshop will cover (final list in development):
 
 * Module 01
     * An introduction to R and RStudio
     * Learning about R Objects and data structures
 * Module 02
     * Introduction to R packages
-    * Loading data, Saving data
+    * Loading data, Saving data (read/write datasets)
 * Module 03
     * Data Visualization with `ggplot2` package
 * Module 04
     * Brief Intro Data Wrangling with `dplyr` package
+    * Introduction to Rmarkdown
 * Module 05
     * An introduction to R and RStudio
     * Learning about R Objects and data structures
 * Module 06
-    * Introduction to R packages
-    * Loading data, Saving data
+    * Introduction to `sf` package for mapping
+    * more with `dplyr` joining datasets
 * Module 07
-    * Data Visualization with `ggplot2` package
+    * Putting it all together into a report
 * Module 08
-    * Brief Intro Data Wrangling with `dplyr` package
+    * Prep and discussion for the final breakout session
 
 
 # Schedule - links to slides and R scripts
@@ -54,8 +98,8 @@ This workshop will cover:
 
 | Time          | Activity         |
 | :------------ | :--------------- |
-| 09:00 - 09:25 | Module 1 [Slides: [Rworkshop_26Oct2022_Module01](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module01.html)]  [R script: [module01_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module01_Rscript.R)] |
-| 09:25 - 09:50 | Module 2 [Slides: [Rworkshop_26Oct2022_Module02](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module02.html)]  [R script: [module02_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module02_Rscript.R)] |
+| 09:00 - 09:25 | Module 1 [Slides and R script TBA] |
+| 09:25 - 09:50 | Module 2 [Slides and R script TBA] |
 |               | Files for optional data import/export: |
 |               | * [abalone.csv - CSV format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.csv) |
 |               | * [abalone.RData - R Binary format](https://github.com/melindahiggins2000/Emory_RWorkshop_26Oct2022/raw/main/abalone.RData) |
@@ -66,55 +110,23 @@ This workshop will cover:
 | ------------- | ---------------- |
 | 09:50 - 10:00 | _BIO Break_   |
 | ------------- | ---------------- |
-| 10:00 - 10:30 | Module 3 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
-| 10:30 - 11:00 | Module 4 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| 10:00 - 10:30 | Module 3 [Slides and R script TBA] |
+| 10:30 - 11:00 | Module 4 [Slides and R script TBA] |
 | ------------- | ---------------- |
-| 11:00 - 12:00 | _Breakout Session 1_ |
+| 11:00 - 12:00 | _Breakout Session 1_ [Files for Breakout 1 TBA] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
 | ------------- | ---------------- |
-| 13:00 - 13:25 | Module 5 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
-| 13:25 - 13:50 | Module 6 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| 13:00 - 13:25 | Module 5 [Slides and R script TBA] |
+| 13:25 - 13:50 | Module 6 [Slides and R script TBA] |
 | ------------- | ---------------- |
 | 13:50 - 14:00 | _BIO Break_   |
 | ------------- | ---------------- |
-| 14:00 - 14:30 | Module 7 [Slides: [Rworkshop_26Oct2022_Module03](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module03.html)]  [R script: [module03_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module03_Rscript.R)] |
-| 14:30 - 15:00 | Module 8 [Slides: [Rworkshop_26Oct2022_Module04](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/Rworkshop_26Oct2022_Module04.html)]  [R script: [module04_Rscript.R](https://melindahiggins2000.github.io/Emory_RWorkshop_26Oct2022/module04_Rscript.R)] |
+| 14:00 - 14:30 | Module 7 [Slides and R script TBA] |
+| 14:30 - 15:00 | Module 8 [Slides and R script TBA] |
 | ------------- | ---------------- |
-| 15:00 - 16:00 | _Breakout Session 2_ |
+| 15:00 - 16:00 | _Breakout Session 2_ [Files for Breakout 2 TBA] |
 | ------------- | ---------------- |
 
-# Preparation for Workshop
-
-1. Install R [https://cran.r-project.org/](https://cran.r-project.org/)
-2. Install RStudio Desktop [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
-3. Install the R packages listed below.
-4. _OPTIONAL_ if you are still actively enrolled in RSPH, you can also run R and RStudio in the Emory RSPH virtual desktop using Apporto, [https://rsphemory.apporto.com/](https://rsphemory.apporto.com/).
-5. Online BOOKS to get started:
-    1. _Statistical Inference via Data Science: A ModernDive into R and the Tidyverse!_ by Chester Ismay and Albert Y. Kim [https://moderndive.netlify.app/](https://moderndive.netlify.app/).
-    2. _R in Action, Third Edition: Data analysis and graphics with R and Tidyverse_ by Robert I. Kabacoff [https://www.manning.com/books/r-in-action-third-edition](https://www.manning.com/books/r-in-action-third-edition)
-    3. _The Epidemiologist R Handbook_ [https://epirhandbook.com/en/](https://epirhandbook.com/en/)
-
-
-
-# R packages to be used in workshop:
-
-* `tidyverse` - which includes:
-    - `ggplot2`
-    - `dplyr`
-    - `readr`
-* `palmerpenguins`
-* `gapminder`
-* `patchwork`
-* `Hmisc`
-* `psych`
-* (optional packages)
-    - `arsenal`
-    - `readxl`
-    - `haven`
-    - `foreign`
-    - `ggthemes`
-    - `ggthemr`
-* All packages available at [CRAN](https://cran.r-project.org/) - click on "Packages"
 
 # Workshop Recording
 
