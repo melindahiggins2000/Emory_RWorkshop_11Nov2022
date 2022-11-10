@@ -35,7 +35,7 @@
     * [abalone.sav - SPSS format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.sav)
     * [abalone.xlsx - EXCEL XLSX format](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/abalone.xlsx)
     * [abalone dataset at UCI library](https://archive.ics.uci.edu/ml/datasets/Abalone)
-    * [Fulton County Map Shapefiles - ZIP file]()
+    * [Fulton County Map Shapefiles - ZIP file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/FultonCountyZipCodes.zip)
     * [FALSE GA COVID DATA - EXCEL file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/FALSE%20COVID%20DATA_TRAINING.xlsx)
 
 **OPTIONAL PREP**
