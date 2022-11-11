@@ -38,6 +38,23 @@ This report will help you use all of the skills you've been introduced to during
 * merging datasets
 * and some new skills - making maps!!
 
+## BEFORE BEGINNING
+
+Before trying to knit this document, you need the Fulton County Shapefiles. Here are the steps:
+
+1. Unzip the `FultonCountyZipCodes.zip` compressed file
+2. Put all of the files into a folder in your project called `FultonCountyZipCodes`.
+    - for example on my PC, my project folder is `C:\Rworkshop` so the sub-folder is `C:\Rworkshop\FultonCountyZipCodes`
+    - in this sub-folder I have the following files:
+        * FultonCountyZipCodes.cpg
+        * FultonCountyZipCodes.dbf
+        * FultonCountyZipCodes.prj
+        * FultonCountyZipCodes.sbn
+        * FultonCountyZipCodes.sbx
+        * FultonCountyZipCodes.shp
+        * FultonCountyZipCodes.shp.xml
+        * FultonCountyZipCodes.shx
+
 ## Fulton County COVID Data
 
 ```{r}
