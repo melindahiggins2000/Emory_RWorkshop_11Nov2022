@@ -64,6 +64,7 @@ summary(tab1)
 ## Plot of Abalone Age by wholeWeight
 
 ```{r}
+library(dplyr)
 abalone <- abalone %>%
   mutate(age = rings + 1.5)
 

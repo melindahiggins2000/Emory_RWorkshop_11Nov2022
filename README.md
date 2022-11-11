@@ -118,7 +118,7 @@ This workshop will cover (final list in development):
 | 11:00 - 12:00 | _Breakout Session 1_ [Files for Breakout 1 TBA] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
 | ------------- | ---------------- |
-| 13:00 - 13:25 | Module 5 [Abalone Rmarkdown Report](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/AbaloneReport.Rmd) |
+| 13:00 - 13:25 | Module 5 [Abalone Rmarkdown Report](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/AbaloneReport.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/AbaloneReport.Rmd) |
 | 13:25 - 13:50 | Module 6 [Merging Datasets Exercise](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/merging_datasets.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/merging_datasets.Rmd) |
 | ------------- | ---------------- |
 | 13:50 - 14:00 | _BIO Break_   |
