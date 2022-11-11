@@ -113,6 +113,7 @@ This workshop will cover (final list in development):
 | 09:50 - 10:00 | _BIO Break_   |
 | ------------- | ---------------- |
 | 10:00 - 10:30 | Module 3 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module03.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript.R)] |
+|               | [R Scripts w/Answers](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript_wAnswers.R) |
 | 10:30 - 11:00 | Module 4 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module04.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module04_Rscript.R)] |
 | ------------- | ---------------- |
 | 11:00 - 12:00 | _Breakout Session 1_ [working on exercises from above modules] |
