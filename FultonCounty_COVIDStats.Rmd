@@ -29,7 +29,14 @@ library(dplyr)
 
 # Report Overview
 
-add text here on what this report is for...
+This report will help you use all of the skills you've been introduced to during this R workshop including:
+
+* making tables
+* making charts and figures
+* reading in datafiles
+* creating new variables
+* merging datasets
+* and some new skills - making maps!!
 
 ## Fulton County COVID Data
 
@@ -50,7 +57,7 @@ maxdate <- max(coviddat$reprt_creationdt_FALSE)
 # https://epirhandbook.com/en/working-with-dates.html#date-display
 ```
 
-The dataset has `r n_covid` COVID cases from mostly the Fulton County, GA area. These data cover COVID cases reported from `r format(mindate, format = "%B %Y")` to `r format(maxdate, format = "%B %Y")`.
+The dataset you will be working with has `r n_covid` COVID cases from mostly the Fulton County, GA area. These data cover COVID cases reported from `r format(mindate, format = "%B %Y")` to `r format(maxdate, format = "%B %Y")`.
 
 ### Table of Demographics
 
@@ -203,13 +210,18 @@ summary(tab1,
 ```
 
 
-
-
 # Maps with points and markers
 
-intro to making maps with data points on them
+Making maps with R is almost a whole other workshop in and of itself. But let's try a few simple maps to get started.
 
-## Make a Map of Atanta with leaflet
+In the exercises below you will be using these packages:
+
+* `leaflet` - learn more at [https://rstudio.github.io/leaflet/](https://rstudio.github.io/leaflet/)
+* `sf` - here are places to learn more:
+    - [https://r-spatial.github.io/sf/](https://r-spatial.github.io/sf/)
+    - [http://www.geo.hunter.cuny.edu/~ssun/R-Spatial/mapping.html#plotting-simple-features-sf-with-plot](http://www.geo.hunter.cuny.edu/~ssun/R-Spatial/mapping.html#plotting-simple-features-sf-with-plot)
+
+## Make a Map of Atanta with `leaflet`
 
 Learn more about the [`leaflet` package](https://rstudio.github.io/leaflet/).
 
@@ -227,7 +239,7 @@ m <- leaflet() %>%
 m %>% addTiles()
 ```
 
-## add data to the map
+## Add data to the map - points/markers
 
 Let's look at the locations of the COVID deaths under review and color the points by gender.
 
@@ -288,11 +300,12 @@ m2 %>% addProviderTiles(providers$MtbMap) %>%
 
 # Aggregating data
 
-info here on aggregating data by categories - like by zipcode
+In this part of the report, you will:
 
-then merge with the shapefile data for the Fulton County zipcodes
-
-and then we can make choropleth maps - maps with colored areas filled in to represent values or categories.
+* use the [`sf`](https://r-spatial.github.io/sf/index.html) package to lay out the geometry shapefiles for the zipcode boundaries in Fulton County, GA
+* use the [`data.table`](https://rdatatable.gitlab.io/data.table/) package to create an aggregated dataset with summaries of variables by zipcode
+* use the [`dplyr`](https://dplyr.tidyverse.org/) package to join the aggregated dataset variable to the shapefile dataset - see some examples at [https://statisticsglobe.com/aggregate-data-table-group-r](https://statisticsglobe.com/aggregate-data-table-group-r)
+* and use the merged dataset to create a choropleth map
 
 ## Load shapefiles for Fulton County Map
 
@@ -309,7 +322,7 @@ plot(st_geometry(fulton_sf),
      main='Fulton County Geometry')
 ```
 
-## pull data of interest and summarize by zipcode
+## Pull data of interest and summarize by zipcode
 
 ```{r}
 library(data.table)
@@ -318,20 +331,7 @@ library(data.table)
 # what is missing or unknown
 # table(coviddat$sym_cough, useNA = "ifany")
 
-# # recode with case_when
-# coviddat <-
-#   coviddat %>%
-#   mutate(
-#     sym_cough.c = case_when(
-#       sym_cough == "No" ~ "No, unk, na",
-#       sym_cough == "Unk" ~ "No, unk, na",
-#       sym_cough == "Yes" ~ "Yes",
-#       is.na(sym_cough) ~ "No, unk, na",
-#       TRUE ~ "No, unk, na"
-#     )
-#   )
-
-# try data.table aggregation
+# use data.table for aggregation
 # do simple counts for now
 cough_zip <-
   coviddat %>%
@@ -350,7 +350,7 @@ cough_sum <-
 ```
 
 
-## then merge and make a choropleth map
+## Then merge and make a choropleth map
 
 ```{r}
 # rname case_zip to ZipCode
@@ -366,7 +366,7 @@ plot(fulton_sf_cough['cough_sum'],
      main='Number of People with Cough Reported')
 ```
 
-## another map option with ggplot2
+## Another map option with ggplot2
 
 ```{r}
 # see colors and options
