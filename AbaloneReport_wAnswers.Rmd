@@ -1,0 +1,129 @@
+---
+title: "Abalone Report"
+author: "Melinda Higgins"
+date: "2022-11-11"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# read in abalone dataset
+# file import dataset using readr
+library(readr)
+abalone <- 
+  read_csv("abalone.csv")
+```
+
+## Summary Statistics of Abalones' - Dimensional Measurements
+
+```{r results = "asis"}
+library(arsenal)
+
+tab1 <- 
+  tableby(~ length + diameter + height, 
+          data=abalone)
+
+summary(tab1)
+```
+
+## Summary Statistics of Abalones' - Weight Measurements
+
+```{r results = "asis"}
+#library(arsenal)
+
+# put in code here to get a table of summary stats
+# for wholeWeight, shuckedWeight, visceraWeight 
+# and shellWeight
+
+tab1 <- 
+  tableby(~ wholeWeight + shuckedWeight + 
+            visceraWeight + shellWeight, 
+          data=abalone)
+
+summary(tab1)
+```
+
+## Abalone Dimensional Measurements by Sex
+
+```{r results = "asis"}
+library(arsenal)
+
+tab1 <- 
+  tableby(sex ~ length + diameter + height, 
+          data=abalone)
+
+summary(tab1)
+```
+
+## Abalone Weight Measurements by Sex
+
+```{r results = "asis"}
+#library(arsenal)
+
+# put in code here to get a table of summary stats
+# for wholeWeight, shuckedWeight, visceraWeight 
+# and shellWeight
+
+tab1 <- 
+  tableby(sex ~ wholeWeight + shuckedWeight + 
+            visceraWeight + shellWeight, 
+          data=abalone)
+
+summary(tab1)
+```
+
+## Plot of Abalone Age by wholeWeight
+
+```{r}
+library(dplyr)
+abalone <- abalone %>%
+  mutate(age = rings + 1.5)
+
+library(ggplot2)
+
+ggplot(abalone,
+       aes(x=wholeWeight, 
+           y=age)) +
+  geom_point() +
+  # add loess smoothed line
+  geom_smooth() + 
+  xlab("Whole Weight (g)") + 
+  ylab("Age (in years)") + 
+  ggtitle("Abalone Age by Whole Weight")
+```
+
+## Plot of Abalone Age by diameter - by sex
+
+Create a plot of abalone age by diameter in mm. Show the plot by sex - either add a color by sex or a facet_wrap().
+
+```{r}
+# put your code here
+# option 1 color points by sex
+ggplot(abalone,
+       aes(x = diameter, 
+           y = age,
+           color = sex)) +
+  geom_point() +
+  # add loess smoothed line
+  geom_smooth() + 
+  xlab("Diameter (mm)") + 
+  ylab("Age (in years)") + 
+  ggtitle("Abalone Age by Whole Weight")
+
+# option 2 facet_wrap() by sex
+ggplot(abalone,
+       aes(x = diameter, 
+           y = age)) +
+  geom_point() +
+  # add loess smoothed line
+  geom_smooth() + 
+  xlab("Diameter (mm)") + 
+  ylab("Age (in years)") + 
+  ggtitle("Abalone Age by Whole Weight") +
+  facet_wrap(vars(sex))
+```
+
+

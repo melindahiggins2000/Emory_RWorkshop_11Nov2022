@@ -115,11 +115,13 @@ This workshop will cover (final list in development):
 | 10:00 - 10:30 | Module 3 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module03.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript.R)] |
 |               | [R Scripts w/Answers](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript_wAnswers.R) |
 | 10:30 - 11:00 | Module 4 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module04.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module04_Rscript.R)] |
+|               | [R Scripts w/Answers](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module04_Rscript_wAnswers.R) |
 | ------------- | ---------------- |
 | 11:00 - 12:00 | _Breakout Session 1_ [working on exercises from above modules] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
 | ------------- | ---------------- |
 | 13:00 - 13:25 | Module 5 [Abalone Rmarkdown Report](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/AbaloneReport.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/AbaloneReport.Rmd) |
+|               | Abalone RMarkdown w/Answers [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/AbaloneReport_wAnswers.Rmd) |
 | 13:25 - 13:50 | Module 6 [Merging Datasets Exercise](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/merging_datasets.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/merging_datasets.Rmd) |
 |               | `data.table` exercise [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/datatable_aggregation_example.R) |
 | ------------- | ---------------- |
