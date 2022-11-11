@@ -107,13 +107,13 @@ This workshop will cover (final list in development):
 
 | Time          | Activity         |
 | :------------ | :--------------- |
-| 09:00 - 09:25 | Module 1 [Slides and R script] |
-| 09:25 - 09:50 | Module 2 [Slides and R script] |
+| 09:00 - 09:25 | Module 1 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module01.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module01_Rscript.R)] |
+| 09:25 - 09:50 | Module 2 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module02.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module02_Rscript.R)] |
 | ------------- | ---------------- |
 | 09:50 - 10:00 | _BIO Break_   |
 | ------------- | ---------------- |
-| 10:00 - 10:30 | Module 3 [Slides and R script] |
-| 10:30 - 11:00 | Module 4 [Slides and R script] |
+| 10:00 - 10:30 | Module 3 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module03.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript.R)] |
+| 10:30 - 11:00 | Module 4 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module04.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module04_Rscript.R)] |
 | ------------- | ---------------- |
 | 11:00 - 12:00 | _Breakout Session 1_ [Files for Breakout 1 TBA] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
