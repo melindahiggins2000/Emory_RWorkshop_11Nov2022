@@ -115,7 +115,7 @@ This workshop will cover (final list in development):
 | 10:00 - 10:30 | Module 3 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module03.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module03_Rscript.R)] |
 | 10:30 - 11:00 | Module 4 [[Slides](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/Rworkshop_11Nov2022_Module04.html#1) and [R script](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/module04_Rscript.R)] |
 | ------------- | ---------------- |
-| 11:00 - 12:00 | _Breakout Session 1_ [Files for Breakout 1 TBA] |
+| 11:00 - 12:00 | _Breakout Session 1_ [working on exercises from above modules] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
 | ------------- | ---------------- |
 | 13:00 - 13:25 | Module 5 [Abalone Rmarkdown Report](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/AbaloneReport.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/AbaloneReport.Rmd) |
@@ -126,7 +126,7 @@ This workshop will cover (final list in development):
 | 14:00 - 14:30 | Module 7 [COVID Cases Report](https://melindahiggins2000.github.io/Emory_RWorkshop_11Nov2022/FultonCounty_COVIDStats.html) and [Rmarkdown file](https://github.com/melindahiggins2000/Emory_RWorkshop_11Nov2022/raw/main/FultonCounty_COVIDStats.Rmd) |
 | 14:30 - 15:00 | Module 8 Open Q&A |
 | ------------- | ---------------- |
-| 15:00 - 16:00 | _Breakout Session 2_ [Files for Breakout 2 TBA] |
+| 15:00 - 16:00 | _Breakout Session 2_ [working on exercises from modules and more editing on COVID case report] |
 | ------------- | ---------------- |
 
 
