@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Module 04: Data Wrangling with dplyr</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Melinda Higgins" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css/ninjutsu.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/middleburymkhCDC.css" type="text/css" />
+    <link rel="stylesheet" href="css/middleburymkh-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/sidecodeplot.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Module 04: Data Wrangling with <code>dplyr</code>
+]
+.subtitle[
+## Rollins COVID-19 Epidemiology Fellowship R Training: Nov 11, 2022
+]
+.author[
+### <a href="https://melindahiggins.netlify.app/">Melinda Higgins</a>
+]
+.date[
+### Director Biostatistics &amp; Data Core </br> School of Nursing - Emory University </br>
+]
+
+---
+
+
+
+
+background-size: 100%
+background-image: url(img/data_cowboy.png)
+background-position: 70% 70%
+class: center, top
+
+# Become a Data Wrangler!
+
+.footnote[
+* Illustrations by Allison Horst, RStudio Artist in Residence, &lt;https://github.com/allisonhorst/stats-illustrations&gt;
+]
+
+---
+
+# What's in My Dataset?
+
+* `str()` see structure of data
+* `head()` and `tail()` functions
+* `names()` list variable names in dataset
+* numerical data - use `summary()`
+* categorical variable or factors - use `table()`
+
+---
+
+# Palmer Penguins Data - Structure
+
+1. Load `palmerpenguins` package
+2. See structure of data
+
+
+```r
+library(palmerpenguins)
+str(penguins)
+```
+
+```
+tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+ $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+ $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+ $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+ $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+ $ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
+ $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
+```
+
+---
+
+# Palmer Penguins Data - "Peek" at Data
+
+1. See top and bottoms rows of data
+2. Use `head()` function
+
+
+```r
+head(penguins)
+```
+
+```
+# A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7         181    3750 male   2007
+2 Adelie  Torgersen           39.5          17.4         186    3800 fema…  2007
+3 Adelie  Torgersen           40.3          18           195    3250 fema…  2007
+4 Adelie  Torgersen           NA            NA            NA      NA &lt;NA&gt;   2007
+5 Adelie  Torgersen           36.7          19.3         193    3450 fema…  2007
+6 Adelie  Torgersen           39.3          20.6         190    3650 male   2007
+# … with abbreviated variable names ¹​flipper_length_mm, ²​body_mass_g
+```
+
+Notice we cannot "see" all of the data - some columns hidden? The data is in a `tibble` data "class"
+
+
+```r
+class(penguins)
+```
+
+```
+[1] "tbl_df"     "tbl"        "data.frame"
+```
+
+---
+
+# Look at more rows - bottom 10 rows
+
+Add the number 10 to the `tail()` function.
+
+
+```r
+tail(penguins, 10)
+```
+
+```
+# A tibble: 10 × 8
+   species   island bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
+   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+ 1 Chinstrap Dream            50.2          18.8         202    3800 male   2009
+ 2 Chinstrap Dream            45.6          19.4         194    3525 fema…  2009
+ 3 Chinstrap Dream            51.9          19.5         206    3950 male   2009
+ 4 Chinstrap Dream            46.8          16.5         189    3650 fema…  2009
+ 5 Chinstrap Dream            45.7          17           195    3650 fema…  2009
+ 6 Chinstrap Dream            55.8          19.8         207    4000 male   2009
+ 7 Chinstrap Dream            43.5          18.1         202    3400 fema…  2009
+ 8 Chinstrap Dream            49.6          18.2         193    3775 male   2009
+ 9 Chinstrap Dream            50.8          19           210    4100 male   2009
+10 Chinstrap Dream            50.2          18.7         198    3775 fema…  2009
+# … with abbreviated variable names ¹​flipper_length_mm, ²​body_mass_g
+```
+
+From `help(tail)` page:
+
+```
+## S3 method for class 'function'
+tail(x, n = 6L, ...)
+```
+---
+
+# Convert from a `tibble` to a plain `data.frame`
+
+We can convert this to a plain `data.frame` class and then look at the complete data.
+
+
+
+
+```r
+penguins.df &lt;- data.frame(penguins)
+class(penguins.df)
+```
+
+```
+[1] "data.frame"
+```
+
+```r
+head(penguins.df)
+```
+
+```
+  species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g    sex year
+1  Adelie Torgersen           39.1          18.7               181        3750   male 2007
+2  Adelie Torgersen           39.5          17.4               186        3800 female 2007
+3  Adelie Torgersen           40.3          18.0               195        3250 female 2007
+4  Adelie Torgersen             NA            NA                NA          NA   &lt;NA&gt; 2007
+5  Adelie Torgersen           36.7          19.3               193        3450 female 2007
+6  Adelie Torgersen           39.3          20.6               190        3650   male 2007
+```
+
+
+
+---
+
+# Get list of variables (column names) in dataset
+
+.left-code[
+
+
+```r
+names(penguins)
+```
+]
+
+.right-plot[
+
+```
+[1] "species"           "island"            "bill_length_mm"   
+[4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
+[7] "sex"               "year"             
+```
+]
+
+---
+
+# Get simple summary stats
+
+.left-code[
+
+
+```r
+summary(penguins)
+```
+]
+
+.right-plot[
+
+```
+      species          island    bill_length_mm  bill_depth_mm  
+ Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+ Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+ Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+                                 Mean   :43.92   Mean   :17.15  
+                                 3rd Qu.:48.50   3rd Qu.:18.70  
+                                 Max.   :59.60   Max.   :21.50  
+                                 NA's   :2       NA's   :2      
+ flipper_length_mm  body_mass_g       sex           year     
+ Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+ 1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+ Median :197.0     Median :4050   NA's  : 11   Median :2008  
+ Mean   :200.9     Mean   :4202                Mean   :2008  
+ 3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+ Max.   :231.0     Max.   :6300                Max.   :2009  
+ NA's   :2         NA's   :2                                 
+```
+]
+
+---
+
+# Simple tables of frequencies
+
+### These examples use `$` to "select" a variable from the `penguins` dataset.
+
+.left-code[
+
+
+```r
+table(penguins$species)
+```
+
+
+```r
+table(penguins$island)
+```
+
+
+```r
+table(penguins$species,
+      penguins$island)
+```
+]
+
+.right-plot[
+
+```
+
+   Adelie Chinstrap    Gentoo 
+      152        68       124 
+```
+
+```
+
+   Biscoe     Dream Torgersen 
+      168       124        52 
+```
+
+```
+           
+            Biscoe Dream Torgersen
+  Adelie        44    56        52
+  Chinstrap      0    68         0
+  Gentoo       124     0         0
+```
+
+]
+
+---
+
+# Learn about `dplyr`
+
+&lt;iframe src="https://dplyr.tidyverse.org/" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+
+---
+
+# Compare Base R versus `dplyr` approach with pipes `%&gt;%`
+
+&lt;iframe src="https://cran.r-project.org/web/packages/dplyr/vignettes/base.html" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+
+---
+
+# Using `dplyr` - functions are verbs
+
+Let's `pull()` out one variable (column) `bill_length_mm` from the `penguins` dataset and then get the `mean()`.
+
+We will use the pipe operator `%&gt;%` from `dplyr` to chain our programming steps together in a logical order.
+
+
+```r
+penguins %&gt;%
+  pull(bill_length_mm) %&gt;%
+  mean()
+```
+
+```
+[1] NA
+```
+
+Try again - add `na.rm=TRUE` option to the `mean()` function find the mean of all of the non-missing (not `NA`) values.
+
+
+```r
+penguins %&gt;%
+  pull(bill_length_mm) %&gt;%
+  mean(na.rm = TRUE)
+```
+
+```
+[1] 43.92193
+```
+
+.footnote[
+Learn more at [https://dplyr.tidyverse.org/](https://dplyr.tidyverse.org/).
+]
+
+---
+
+# The Base R way to do the same thing
+
+
+```r
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+```
+[1] 43.92193
+```
+
+--
+
+This is processed similar to the previous slide, but now we have to look from the inside out. 
+
+--
+
+The `$` operator selects the `bill_length_mm` variable in the `penguins` dataset.
+
+--
+
+This is fed into the `mean()` function as the column vector of data we want to find the mean for.
+
+--
+
+And then we also add the `na.rm = TRUE` option to the `mean()` function.
+
+--
+
+.footnote[I like `dplyr` better. But knowing the base R way is good also.]
+
+---
+
+# Choose more than 1 variable with `select()`
+
+Let's get `summary()` statistics for `body_mass_g` and `flipper_length_mm`
+
+
+```r
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm) %&gt;%
+  summary()
+```
+
+```
+  body_mass_g   flipper_length_mm
+ Min.   :2700   Min.   :172.0    
+ 1st Qu.:3550   1st Qu.:190.0    
+ Median :4050   Median :197.0    
+ Mean   :4202   Mean   :200.9    
+ 3rd Qu.:4750   3rd Qu.:213.0    
+ Max.   :6300   Max.   :231.0    
+ NA's   :2      NA's   :2        
+```
+
+The `summary()` function is a useful base R function - I just wish it gave you standard deviation!!!
+
+---
+
+# Another "summary" stat function - Hmisc::describe()
+
+
+
+
+```r
+library(Hmisc)
+
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm) %&gt;%
+  Hmisc::describe()
+```
+
+```
+. 
+
+ 2  Variables      344  Observations
+------------------------------------------------------------------------------------------------------------------------
+body_mass_g 
+       n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
+     342        2       94        1     4202    911.8     3150     3300     3550     4050     4750     5400     5650 
+
+lowest : 2700 2850 2900 2925 2975, highest: 5850 5950 6000 6050 6300
+------------------------------------------------------------------------------------------------------------------------
+flipper_length_mm 
+       n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
+     342        2       55    0.999    200.9    16.03    181.0    185.0    190.0    197.0    213.0    220.9    225.0 
+
+lowest : 172 174 176 178 179, highest: 226 228 229 230 231
+------------------------------------------------------------------------------------------------------------------------
+```
+
+.footnote[Notice the use of `Hmisc::describe()` - the "describe" function has the same name in both the `Hmisc` and `psych` packages. So we use the syntax `packagename::function()` to avoid confusion.]
+
+
+
+---
+
+# Also try psych::describe() for summary stats
+
+
+
+
+```r
+library(psych)
+
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm) %&gt;%
+  psych::describe()
+```
+
+```
+                  vars   n    mean     sd median trimmed    mad  min  max range skew kurtosis    se
+body_mass_g          1 342 4201.75 801.95   4050 4154.01 889.56 2700 6300  3600 0.47    -0.74 43.36
+flipper_length_mm    2 342  200.92  14.06    197  200.34  16.31  172  231    59 0.34    -1.00  0.76
+```
+
+.footnote[Notice the use of `psych::describe()` - the "describe" function has the same name in both the `Hmisc` and `psych` packages. So we use the syntax `packagename::function()` to avoid confusion.]
+
+
+
+---
+
+# Create custom statistics output
+
+The `summarise()` function from `dplyr` will let you create custom statistical summaries.
+
+
+```r
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm) %&gt;%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  )
+```
+
+```
+# A tibble: 1 × 4
+  body_mean body_sd flip_mean flip_sd
+      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1     4202.    802.      201.    14.1
+```
+
+---
+
+# Use `group_by()` to further improve your output
+
+Let's get the same output but now grouped by `species.` Notice we added `species` to the `select()` list of variables.
+
+
+```r
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm, species) %&gt;%
+* group_by(species) %&gt;%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  )
+```
+
+```
+# A tibble: 3 × 5
+  species   body_mean body_sd flip_mean flip_sd
+  &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 Adelie        3701.    459.      190.    6.54
+2 Chinstrap     3733.    384.      196.    7.13
+3 Gentoo        5076.    504.      217.    6.48
+```
+
+---
+
+# Understanding the programming workflow with `%&gt;%`
+
+Another fun built-in dataset is `mtcars`. Here is a quick look at that dataset. Watch the programming workflow on next 2 slides.
+
+
+```r
+head(mtcars, 10)
+```
+
+```
+                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+```
+
+---
+
+
+
+count: false
+ 
+
+.panel1-my_mtcars-auto[
+
+```r
+*mtcars
+```
+]
+ 
+.panel2-my_mtcars-auto[
+
+```
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars-auto[
+
+```r
+mtcars %&gt;%
+* select(cyl, mpg, hp)
+```
+]
+ 
+.panel2-my_mtcars-auto[
+
+```
+                    cyl  mpg  hp
+Mazda RX4             6 21.0 110
+Mazda RX4 Wag         6 21.0 110
+Datsun 710            4 22.8  93
+Hornet 4 Drive        6 21.4 110
+Hornet Sportabout     8 18.7 175
+Valiant               6 18.1 105
+Duster 360            8 14.3 245
+Merc 240D             4 24.4  62
+Merc 230              4 22.8  95
+Merc 280              6 19.2 123
+Merc 280C             6 17.8 123
+Merc 450SE            8 16.4 180
+Merc 450SL            8 17.3 180
+Merc 450SLC           8 15.2 180
+Cadillac Fleetwood    8 10.4 205
+Lincoln Continental   8 10.4 215
+Chrysler Imperial     8 14.7 230
+Fiat 128              4 32.4  66
+Honda Civic           4 30.4  52
+Toyota Corolla        4 33.9  65
+Toyota Corona         4 21.5  97
+Dodge Challenger      8 15.5 150
+AMC Javelin           8 15.2 150
+Camaro Z28            8 13.3 245
+Pontiac Firebird      8 19.2 175
+Fiat X1-9             4 27.3  66
+Porsche 914-2         4 26.0  91
+Lotus Europa          4 30.4 113
+Ford Pantera L        8 15.8 264
+Ferrari Dino          6 19.7 175
+Maserati Bora         8 15.0 335
+Volvo 142E            4 21.4 109
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+* arrange(hp)
+```
+]
+ 
+.panel2-my_mtcars-auto[
+
+```
+                    cyl  mpg  hp
+Honda Civic           4 30.4  52
+Merc 240D             4 24.4  62
+Toyota Corolla        4 33.9  65
+Fiat 128              4 32.4  66
+Fiat X1-9             4 27.3  66
+Porsche 914-2         4 26.0  91
+Datsun 710            4 22.8  93
+Merc 230              4 22.8  95
+Toyota Corona         4 21.5  97
+Valiant               6 18.1 105
+Volvo 142E            4 21.4 109
+Mazda RX4             6 21.0 110
+Mazda RX4 Wag         6 21.0 110
+Hornet 4 Drive        6 21.4 110
+Lotus Europa          4 30.4 113
+Merc 280              6 19.2 123
+Merc 280C             6 17.8 123
+Dodge Challenger      8 15.5 150
+AMC Javelin           8 15.2 150
+Hornet Sportabout     8 18.7 175
+Pontiac Firebird      8 19.2 175
+Ferrari Dino          6 19.7 175
+Merc 450SE            8 16.4 180
+Merc 450SL            8 17.3 180
+Merc 450SLC           8 15.2 180
+Cadillac Fleetwood    8 10.4 205
+Lincoln Continental   8 10.4 215
+Chrysler Imperial     8 14.7 230
+Duster 360            8 14.3 245
+Camaro Z28            8 13.3 245
+Ford Pantera L        8 15.8 264
+Maserati Bora         8 15.0 335
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+  arrange(hp) %&gt;%
+* summarise(meanmpg = mean(mpg),
+*           meanhp = mean(hp))
+```
+]
+ 
+.panel2-my_mtcars-auto[
+
+```
+   meanmpg   meanhp
+1 20.09062 146.6875
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+  arrange(hp) %&gt;%
+  summarise(meanmpg = mean(mpg),
+            meanhp = mean(hp)) %&gt;%
+* knitr::kable(
+*   col.names = c("MPG","HP"),
+*   caption = "Means of MPG and HP"
+*   )
+```
+]
+ 
+.panel2-my_mtcars-auto[
+
+Table: Means of MPG and HP
+
+|      MPG|       HP|
+|--------:|--------:|
+| 20.09062| 146.6875|
+]
+
+&lt;style&gt;
+.panel1-my_mtcars-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-my_mtcars-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-my_mtcars-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+*mtcars
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+```
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+mtcars %&gt;%
+* select(cyl, mpg, hp)
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+```
+                    cyl  mpg  hp
+Mazda RX4             6 21.0 110
+Mazda RX4 Wag         6 21.0 110
+Datsun 710            4 22.8  93
+Hornet 4 Drive        6 21.4 110
+Hornet Sportabout     8 18.7 175
+Valiant               6 18.1 105
+Duster 360            8 14.3 245
+Merc 240D             4 24.4  62
+Merc 230              4 22.8  95
+Merc 280              6 19.2 123
+Merc 280C             6 17.8 123
+Merc 450SE            8 16.4 180
+Merc 450SL            8 17.3 180
+Merc 450SLC           8 15.2 180
+Cadillac Fleetwood    8 10.4 205
+Lincoln Continental   8 10.4 215
+Chrysler Imperial     8 14.7 230
+Fiat 128              4 32.4  66
+Honda Civic           4 30.4  52
+Toyota Corolla        4 33.9  65
+Toyota Corona         4 21.5  97
+Dodge Challenger      8 15.5 150
+AMC Javelin           8 15.2 150
+Camaro Z28            8 13.3 245
+Pontiac Firebird      8 19.2 175
+Fiat X1-9             4 27.3  66
+Porsche 914-2         4 26.0  91
+Lotus Europa          4 30.4 113
+Ford Pantera L        8 15.8 264
+Ferrari Dino          6 19.7 175
+Maserati Bora         8 15.0 335
+Volvo 142E            4 21.4 109
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+* arrange(hp)
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+```
+                    cyl  mpg  hp
+Honda Civic           4 30.4  52
+Merc 240D             4 24.4  62
+Toyota Corolla        4 33.9  65
+Fiat 128              4 32.4  66
+Fiat X1-9             4 27.3  66
+Porsche 914-2         4 26.0  91
+Datsun 710            4 22.8  93
+Merc 230              4 22.8  95
+Toyota Corona         4 21.5  97
+Valiant               6 18.1 105
+Volvo 142E            4 21.4 109
+Mazda RX4             6 21.0 110
+Mazda RX4 Wag         6 21.0 110
+Hornet 4 Drive        6 21.4 110
+Lotus Europa          4 30.4 113
+Merc 280              6 19.2 123
+Merc 280C             6 17.8 123
+Dodge Challenger      8 15.5 150
+AMC Javelin           8 15.2 150
+Hornet Sportabout     8 18.7 175
+Pontiac Firebird      8 19.2 175
+Ferrari Dino          6 19.7 175
+Merc 450SE            8 16.4 180
+Merc 450SL            8 17.3 180
+Merc 450SLC           8 15.2 180
+Cadillac Fleetwood    8 10.4 205
+Lincoln Continental   8 10.4 215
+Chrysler Imperial     8 14.7 230
+Duster 360            8 14.3 245
+Camaro Z28            8 13.3 245
+Ford Pantera L        8 15.8 264
+Maserati Bora         8 15.0 335
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+  arrange(hp) %&gt;%
+* group_by(cyl)
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+```
+# A tibble: 32 × 3
+# Groups:   cyl [3]
+     cyl   mpg    hp
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     4  30.4    52
+ 2     4  24.4    62
+ 3     4  33.9    65
+ 4     4  32.4    66
+ 5     4  27.3    66
+ 6     4  26      91
+ 7     4  22.8    93
+ 8     4  22.8    95
+ 9     4  21.5    97
+10     6  18.1   105
+# … with 22 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+  arrange(hp) %&gt;%
+  group_by(cyl) %&gt;%
+* summarise(meanmpg = mean(mpg),
+*           meanhp = mean(hp))
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+```
+# A tibble: 3 × 3
+    cyl meanmpg meanhp
+  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1     4    26.7   82.6
+2     6    19.7  122. 
+3     8    15.1  209. 
+```
+]
+
+---
+count: false
+ 
+
+.panel1-my_mtcars2-auto[
+
+```r
+mtcars %&gt;%
+  select(cyl, mpg, hp) %&gt;%
+  arrange(hp) %&gt;%
+  group_by(cyl) %&gt;%
+  summarise(meanmpg = mean(mpg),
+            meanhp = mean(hp)) %&gt;%
+* knitr::kable(
+*   col.names = c("CYL","MPG","HP"),
+*   caption = "Means of MPG and HP by CYL")
+```
+]
+ 
+.panel2-my_mtcars2-auto[
+
+Table: Means of MPG and HP by CYL
+
+| CYL|      MPG|        HP|
+|---:|--------:|---------:|
+|   4| 26.66364|  82.63636|
+|   6| 19.74286| 122.28571|
+|   8| 15.10000| 209.21429|
+]
+
+&lt;style&gt;
+.panel1-my_mtcars2-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-my_mtcars2-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-my_mtcars2-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+# Use `knitr::kable()` for pretty output table
+
+Use `knitr::kable()` on any table, data.frame, matrix or tibble to get pretty output.
+
+
+```r
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm, species) %&gt;%
+  group_by(species) %&gt;%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  ) %&gt;%
+* knitr::kable()
+```
+
+
+
+|species   | body_mean|  body_sd| flip_mean|  flip_sd|
+|:---------|---------:|--------:|---------:|--------:|
+|Adelie    |  3700.662| 458.5661|  189.9536| 6.539457|
+|Chinstrap |  3733.088| 384.3351|  195.8235| 7.131894|
+|Gentoo    |  5076.016| 504.1162|  217.1870| 6.484976|
+
+---
+
+# `knitr::kable()` - add better column headings
+
+Use `knitr::kable()` on any table, data.frame, matrix or tibble to get pretty output.
+
+
+```r
+penguins %&gt;%
+  select(body_mass_g, flipper_length_mm, species) %&gt;%
+  group_by(species) %&gt;%
+  summarise(
+    body_mean = mean(body_mass_g, na.rm=TRUE),
+    body_sd = sd(body_mass_g, na.rm=TRUE),
+    flip_mean = mean(flipper_length_mm, na.rm=TRUE),
+    flip_sd = sd(flipper_length_mm, na.rm=TRUE)
+  ) %&gt;%
+* knitr::kable(col.names = c("Species",
+*                            "Mean Body Mass (g)",
+*                            "SD of Body Mass (g)",
+*                            "Mean Flipper Length (mm)",
+*                            "SD of Flipper Length (mm)"))
+```
+
+
+
+|Species   | Mean Body Mass (g)| SD of Body Mass (g)| Mean Flipper Length (mm)| SD of Flipper Length (mm)|
+|:---------|------------------:|-------------------:|------------------------:|-------------------------:|
+|Adelie    |           3700.662|            458.5661|                 189.9536|                  6.539457|
+|Chinstrap |           3733.088|            384.3351|                 195.8235|                  7.131894|
+|Gentoo    |           5076.016|            504.1162|                 217.1870|                  6.484976|
+
+---
+
+&lt;img src="img/dplyr_across.png" width="=100%" /&gt;
+
+---
+
+# `dplyr::across()`
+
+
+```r
+penguins %&gt;%
+  dplyr::group_by(species) %&gt;%
+* dplyr::summarize(across(ends_with("mm"), mean, na.rm = TRUE)) %&gt;%
+  knitr::kable()
+```
+
+
+
+|species   | bill_length_mm| bill_depth_mm| flipper_length_mm|
+|:---------|--------------:|-------------:|-----------------:|
+|Adelie    |       38.79139|      18.34636|          189.9536|
+|Chinstrap |       48.83382|      18.42059|          195.8235|
+|Gentoo    |       47.50488|      14.98211|          217.1870|
+
+--
+
+Besides `ends_with()` also explore:
+
+* `starts_with()`
+* `contains()`
+* `matches()`
+* learn more about `tidyselect` package [https://tidyselect.r-lib.org/](https://tidyselect.r-lib.org/) (loaded with `dplyr`)
+
+**NOTE:** The code above added the packagename syntax `dplyr::group_by()` and `dplyr::summarise()` to avoid confusion with `Hmisc::summarize()`.
+
+.footnote[Learn more at [https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome](https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome)]
+
+---
+
+class: left, middle, inverse
+
+# YOUR TURN [ZOOM BREAKOUT 5-10 MIN]
+
+### 1. Open module04_Rscript.R
+### 2. Do EXERCISE 04
+### 3. Do EXERCISE 05
+
+---
+
+&lt;img src="img/dplyr_filter.jpg" width="=100%" /&gt;
+
+---
+
+# Using `dplyr::filter()` to select cases (rows)
+
+Get summary statistics for the Chinstrap penguins
+
+
+
+
+```r
+penguins %&gt;%
+* filter(species == "Chinstrap") %&gt;%
+  summary()
+```
+
+```
+      species         island   bill_length_mm  bill_depth_mm   flipper_length_mm  body_mass_g       sex    
+ Adelie   : 0   Biscoe   : 0   Min.   :40.90   Min.   :16.40   Min.   :178.0     Min.   :2700   female:34  
+ Chinstrap:68   Dream    :68   1st Qu.:46.35   1st Qu.:17.50   1st Qu.:191.0     1st Qu.:3488   male  :34  
+ Gentoo   : 0   Torgersen: 0   Median :49.55   Median :18.45   Median :196.0     Median :3700              
+                               Mean   :48.83   Mean   :18.42   Mean   :195.8     Mean   :3733              
+                               3rd Qu.:51.08   3rd Qu.:19.40   3rd Qu.:201.0     3rd Qu.:3950              
+                               Max.   :58.00   Max.   :20.80   Max.   :212.0     Max.   :4800              
+      year     
+ Min.   :2007  
+ 1st Qu.:2007  
+ Median :2008  
+ Mean   :2008  
+ 3rd Qu.:2009  
+ Max.   :2009  
+```
+
+
+
+---
+
+&lt;img src="img/dplyr_mutate.png" width="75%" /&gt;
+
+---
+
+# `dplyr::mutate()` to make new variables
+
+The body_mass_g is currently in grams. Let's create a new variable for the mass in kg. Save the updated dataset as `penguins.mod`.
+
+
+```r
+penguins.mod &lt;- penguins %&gt;%
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+penguins.mod %&gt;%
+  select(body_mass_g, body_mass_kg) %&gt;%
+  head()
+```
+
+```
+# A tibble: 6 × 2
+  body_mass_g body_mass_kg
+        &lt;int&gt;        &lt;dbl&gt;
+1        3750         3.75
+2        3800         3.8 
+3        3250         3.25
+4          NA        NA   
+5        3450         3.45
+6        3650         3.65
+```
+
+---
+
+&lt;img src="img/dplyr_case_when.png" width="75%" /&gt;
+
+---
+
+# Making categories or recoding - dplyr::case_when()
+
+.pull-left[
+
+
+```r
+# Use case_when() to create
+# three size categories
+penguins_mod &lt;- penguins %&gt;%
+  mutate(size_bin = case_when(
+    body_mass_g &gt; 4500 ~ "large",
+    body_mass_g &gt; 3000 &amp; 
+      body_mass_g &lt;= 4500 ~ "medium",
+    body_mass_g &lt;= 3000 ~ "small"
+    )
+  )
+
+# Create summary table 
+# of size categories
+penguins_mod %&gt;% 
+  pull(size_bin) %&gt;% 
+* table(useNA = "ifany") %&gt;%
+  knitr::kable(
+    col.names = c("Size Category",
+                  "Frequency"))
+```
+
+]
+
+.pull-right[
+
+### Table of Body Size Categories
+
+
+|Size Category | Frequency|
+|:-------------|---------:|
+|large         |       115|
+|medium        |       216|
+|small         |        11|
+|NA            |         2|
+
+]
+
+.footnote[Notice `useNA = "ifany"` option added to `table()` to print the number of missing `NA`'s]
+
+---
+
+# Make a 2-way table
+
+.pull-left[
+
+
+```r
+# use with() to "attach"
+# dataset to then use only variable
+# names in table() function
+penguins_mod %&gt;%
+  with(table(species, island))
+```
+
+]
+
+.pull-right[
+
+### Frequency Table of Species by Island
+
+
+```
+           island
+species     Biscoe Dream Torgersen
+  Adelie        44    56        52
+  Chinstrap      0    68         0
+  Gentoo       124     0         0
+```
+]
+
+---
+
+# Quick Table Example - Arsenal Package
+
+
+```r
+library(arsenal)
+
+tab1 &lt;- tableby(island ~ bill_length_mm + bill_depth_mm, 
+                data = penguins)
+summary(tab1)
+```
+
+
+
+|                            | Biscoe (N=168)  |  Dream (N=124)  | Torgersen (N=52) |  Total (N=344)  | p value|
+|:---------------------------|:---------------:|:---------------:|:----------------:|:---------------:|-------:|
+|**bill_length_mm**          |                 |                 |                  |                 | &lt; 0.001|
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;N-Miss    |        1        |        0        |        1         |        2        |        |
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;Mean (SD) | 45.257 (4.773)  | 44.168 (5.954)  |  38.951 (3.025)  | 43.922 (5.460)  |        |
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;Range     | 34.500 - 59.600 | 32.100 - 58.000 | 33.500 - 46.000  | 32.100 - 59.600 |        |
+|**bill_depth_mm**           |                 |                 |                  |                 | &lt; 0.001|
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;N-Miss    |        1        |        0        |        1         |        2        |        |
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;Mean (SD) | 15.875 (1.821)  | 18.344 (1.133)  |  18.429 (1.339)  | 17.151 (1.975)  |        |
+|&amp;nbsp;&amp;nbsp;&amp;nbsp;Range     | 13.100 - 21.100 | 15.500 - 21.200 | 15.900 - 21.500  | 13.100 - 21.500 |        |
+
+.footnote[Learn more about the `arsenal` package and `tableby()` function at [https://cran.r-project.org/web/packages/arsenal/vignettes/tableby.html](https://cran.r-project.org/web/packages/arsenal/vignettes/tableby.html).]
+
+---
+
+class: left, middle, inverse
+
+# YOUR TURN [ZOOM BREAKOUT 5-10 MIN]
+
+### 1. Open module04_Rscript.R
+### 2. Do EXERCISE 06
+### 3. Do EXERCISE 07
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="midd_xaringan.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "gruvbox-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

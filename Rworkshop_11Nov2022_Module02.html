@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Module 02: Getting Started with Packages &amp; Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Melinda Higgins" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css/ninjutsu.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/middleburymkhCDC.css" type="text/css" />
+    <link rel="stylesheet" href="css/middleburymkh-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Module 02: Getting Started with Packages &amp; Data
+]
+.subtitle[
+## Rollins COVID-19 Epidemiology Fellowship R Training: Nov 11, 2022
+]
+.author[
+### <a href="https://melindahiggins.netlify.app/">Melinda Higgins</a>
+]
+.date[
+### Director Biostatistics &amp; Data Core </br> School of Nursing - Emory University </br>
+]
+
+---
+
+
+
+
+# Why Learn R?
+
+* https://www.tiobe.com/tiobe-index/r/
+* https://www.tiobe.com/tiobe-index/
+* https://r4stats.com/articles/popularity/
+
+### AND Rmarkdown...
+
+* Seamless integration of DATA + CODE + DOCUMENTATION
+* See examples [https://rmarkdown.rstudio.com/gallery.html](https://rmarkdown.rstudio.com/gallery.html)
+* Many output formats [https://rmarkdown.rstudio.com/formats.html](https://rmarkdown.rstudio.com/formats.html)
+* Learn more at [https://rmarkdown.rstudio.com/lesson-1.html](https://rmarkdown.rstudio.com/lesson-1.html)
+
+---
+
+# R vs Other Stats Software
+
+.pull-left[
+## R
+
+* bare bones
+* takes up very little memory
+* powerful base packages
+* FREE/Open Source
+]
+
+.pull-right[
+## SPSS, SAS examples
+
+* Have to buy base ($$)
+* AND Almost always have to buy add-ons, gets expensive $$
+* Have to know what you want ahead of time
+* Sometimes end up with more than you need
+]
+
+---
+
+# My SAS License Includes:
+
+&lt;img src="sas_packages.png" width="70%" /&gt;
+
+---
+
+# My SPSS License Includes:
+
+&lt;img src="spss_packages.png" width="50%" /&gt;
+
+---
+
+# R - Base R Packages
+
+.pull-left[
+
+
+```r
+sessionInfo()
+```
+]
+
+
+.pull-right[
+&lt;img src="sessionInfo01.png" width="100%" /&gt;
+]
+
+.footnote[Add package(s) as you need them...]
+---
+
+# To add functionality to R - install/load Packages
+
+### FIRST INSTALL Package(s)
+
+.pull-left[
+&lt;img src="install_packages01.png" width="60%" /&gt;
+]
+
+.pull-right[
+&lt;img src="install_packages02.png" width="90%" /&gt;
+]
+
+---
+
+# List Packages Installed on Your Computer
+
+.pull-left[
+&lt;img src="packages_list_user.png" width="100%" /&gt;
+]
+
+.pull-right[
+&lt;img src="packages_list_system.png" width="100%" /&gt;
+]
+
+---
+### SECOND - LOAD Package(s) into Current R Session
+
+.pull-left[
+
+Before you can use the functions in the package installed on your computer, you must load it into your current "R session" - only loaded as needed...
+
+
+```r
+# load tidyverse
+library(tidyverse)
+
+# run sessionInfo() again
+# now how many packages are "attached"
+# under "other attached packages"
+sessionInfo()
+```
+]
+
+.pull-right[
+
+&lt;img src="sessionInfo02.png" width="100%" /&gt;
+]
+
+---
+
+# Where to get R Packages - CRAN
+
+&lt;iframe src="https://cran.r-project.org/" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+.footnote[[https://cran.r-project.org/](https://cran.r-project.org/)]
+---
+
+# Where to get R Packages - Bioconductor
+
+&lt;iframe src="https://www.bioconductor.org/" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+.footnote[[https://www.bioconductor.org/](https://www.bioconductor.org/)]
+
+---
+
+# Where to get R Packages - Github, Local, Others...
+[https://github.com/search?l=R&amp;q=packages&amp;type=Repositories](https://github.com/search?l=R&amp;q=packages&amp;type=Repositories)
+
+&lt;img src="GithubRPackages.png" width="100%" /&gt;
+
+---
+
+# Do Your Research
+
+* Always research your packages - like any other "tool"
+    * has it be validated? 
+    * has it been published? 
+    * has is it been used/accepted in your research field or application?
+    
+--
+
+* Check download stats: [https://hadley.shinyapps.io/cran-downloads/](https://hadley.shinyapps.io/cran-downloads/)
+
+--
+
+* Check CRAN: e.g. `tidyverse` [https://cran.r-project.org/web/packages/tidyverse/index.html](https://cran.r-project.org/web/packages/tidyverse/index.html):
+    * check date last updated
+    * how many versions
+    * how long has it existed
+
+--
+
+* Check Github repo if exists, check issues:
+    * `tidyverse` [https://github.com/tidyverse/tidyverse](https://github.com/tidyverse/tidyverse)
+
+---
+class: inverse, middle, left
+
+# EXERCISE 01 - Reviewing R Packages - do together
+
+### 1. Open "module02_Rscript.R"
+### 2. Read instructions for EXERCISE 01
+
+* Go to https://hadley.shinyapps.io/cran-downloads/
+* How many downloads have there been (on average) recently:
+    * for the `ggplot2` and `palmerpenguins` packages?
+    * remove `ggplot2` and make plot again
+    * compare downloads for `arsenal` and `gtsummary` packages
+    
+* Go to https://cran.r-project.org/ - click on packages:
+    * how many Packages are on CRAN today?
+    * list by name and find `ggplot2` package
+    * when was it last updated?
+    * go to github repo for ggplot2 - any open issues?
+    
+---
+
+# Interactive RStudio
+
+### 1. Open RStudio
+### 2. Open "module02_Rscript.R"
+### 3. Go to "DATASETS"
+###    - step through code steps to load data
+###    - save "image" close and reopen project
+### 4. If time - check out [OPTIONAL] SAVING and LOADING the "abalone" dataset
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="midd_xaringan.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "gruvbox-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

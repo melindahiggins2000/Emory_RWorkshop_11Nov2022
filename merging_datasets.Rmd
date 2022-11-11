@@ -1,0 +1,157 @@
+---
+title: "Merging Datasets Example"
+author: "Melinda Higgins"
+date: "11/11/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# show code
+knitr::opts_chunk$set(echo = TRUE)
+# compile Rmarkdown "knit" even if errors
+knitr::opts_chunk$set(error = TRUE)
+
+# make any table output 
+# formatted as a table
+library(printr)
+
+# load dplyr for these examples
+library(dplyr)
+```
+
+## Merging Datasets - adding rows
+
+This is not as common, but sometimes you want to "stack" datasets by adding rows - perhaps merging multiple survey datasets from different groups or over time. So, you are adding participants responses by adding rows to your dataset.
+
+Typically you will want EVERY COLUMN to match - number of columns and column names must match. But there are ways to add new rows even if there are more/different columns - suppose you added a question in a new survey but still want to merge all the other question responses.
+
+```{r}
+library(palmerpenguins)
+
+allpenguins <- penguins
+table(penguins$species)
+
+adeliepenguins <- penguins %>%
+  filter(species == "Adelie")
+
+gentoopenguins <- penguins %>%
+  filter(species == "Gentoo")
+
+head(adeliepenguins)
+
+head(gentoopenguins)
+
+# merge adelie and gentoo
+# same number of columns
+# same names of columns
+# use rbind() from base R
+
+adelie_gentoo <- rbind(adeliepenguins,
+                       gentoopenguins)
+
+adelie_rearrange <- adeliepenguins %>%
+  relocate(year, .before = species)
+
+adeliere_gentoo <- rbind(adelie_rearrange,
+                         gentoopenguins)
+
+# suppose we add a new column to adelie
+
+adeliemod <- adeliepenguins %>%
+  mutate(bill_length_cm = bill_length_mm/10)
+
+# let's try this again with
+# added column in adeliemod
+adeliemod_gentoo <- rbind(adeliemod,
+                          gentoopenguins)
+
+# we get an error - now what...
+# use alternate approach with
+# bind_rows() from dplyr
+
+adelie_gentoo2 <- 
+  dplyr::bind_rows(adeliepenguins,
+                   gentoopenguins)
+
+# now the extra column is added and NAs
+# are automatically added for the 
+# missing data in the gentoopenguins dataset
+# for the bill_length_cm column in
+# adeliemod modified dataset
+
+adeliemod_gentoo2 <- 
+  dplyr::bind_rows(adeliemod,
+                   gentoopenguins)
+
+# suppose some column names do not match
+gentoomod <- gentoopenguins %>%
+  rename(date = year)
+
+names(adeliemod)
+names(gentoomod)
+
+adeliemod_gentoomod <- 
+  dplyr::bind_rows(adeliemod,
+                   gentoomod)
+
+names(adeliemod_gentoomod)
+head(adeliemod_gentoomod)
+```
+
+So be sure you line up your column names FIRST.
+
+## Merging Datasets - adding columns
+
+This is very common - you have two (or more) datasets for the subjects in your project. There could be survey data, lab data, EMR data, etc and you want to merge them together to build a complete patient record.
+
+However, you will need to make decisions on who you want to keep in the final dataset - everyone? only people with all data elements? only people in the "main" dataset?
+
+```{r}
+library(readr)
+data1 <- read_csv("data1.csv")
+data2 <- read_csv("data2.csv")
+
+data1
+data2
+```
+
+## Keep only rows (people) in both datasets - inner join
+
+```{r}
+both <- dplyr::inner_join(x = data1,
+                          y = data2,
+                          by = "id")
+both
+```
+
+## Keep rows (people) in dataset 1 - left join
+
+```{r}
+left <- dplyr::left_join(x = data1,
+                         y = data2,
+                         by = "id")
+left
+```
+
+## Keep rows (people) in dataset 2 - right join - or just reverse left join
+
+```{r}
+right <- dplyr::right_join(x = data1,
+                           y = data2,
+                           by = "id")
+right
+```
+
+## Keep ALL rows (people) in either dataset - full join
+
+```{r}
+full <- dplyr::full_join(x = data1,
+                         y = data2,
+                         by = "id")
+full
+```
+
+
+

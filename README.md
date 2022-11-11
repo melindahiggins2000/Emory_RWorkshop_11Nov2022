@@ -88,17 +88,15 @@ This workshop will cover (final list in development):
     * Data Visualization with `ggplot2` package
 * Module 04
     * Brief Intro Data Wrangling with `dplyr` package
-    * Introduction to Rmarkdown
 * Module 05
-    * An introduction to R and RStudio
-    * Learning about R Objects and data structures
+    * Introduction to [Rmarkdown](https://rmarkdown.rstudio.com/)
+    * Exercise - creating Rmarkdown Report
 * Module 06
-    * Introduction to `sf` package for mapping
-    * more with `dplyr` joining datasets
+    * Using `dplyr` to join datasets
 * Module 07
-    * Putting it all together into a report
+    * Putting it all together into a "COVID Case Report"
 * Module 08
-    * Prep and discussion for the final breakout session
+    * Open Dialog - audience questions
 
 
 # Schedule - links to slides and R scripts
@@ -109,24 +107,24 @@ This workshop will cover (final list in development):
 
 | Time          | Activity         |
 | :------------ | :--------------- |
-| 09:00 - 09:25 | Module 1 [Slides and R script TBA] |
-| 09:25 - 09:50 | Module 2 [Slides and R script TBA] |
+| 09:00 - 09:25 | Module 1 [Slides and R script] |
+| 09:25 - 09:50 | Module 2 [Slides and R script] |
 | ------------- | ---------------- |
 | 09:50 - 10:00 | _BIO Break_   |
 | ------------- | ---------------- |
-| 10:00 - 10:30 | Module 3 [Slides and R script TBA] |
-| 10:30 - 11:00 | Module 4 [Slides and R script TBA] |
+| 10:00 - 10:30 | Module 3 [Slides and R script] |
+| 10:30 - 11:00 | Module 4 [Slides and R script] |
 | ------------- | ---------------- |
 | 11:00 - 12:00 | _Breakout Session 1_ [Files for Breakout 1 TBA] |
 | 12:00 - 13:00 | **LUNCH BREAK** |
 | ------------- | ---------------- |
-| 13:00 - 13:25 | Module 5 [Slides and R script TBA] |
-| 13:25 - 13:50 | Module 6 [Slides and R script TBA] |
+| 13:00 - 13:25 | Module 5 [] |
+| 13:25 - 13:50 | Module 6 [] |
 | ------------- | ---------------- |
 | 13:50 - 14:00 | _BIO Break_   |
 | ------------- | ---------------- |
-| 14:00 - 14:30 | Module 7 [Slides and R script TBA] |
-| 14:30 - 15:00 | Module 8 [Slides and R script TBA] |
+| 14:00 - 14:30 | Module 7 [] |
+| 14:30 - 15:00 | Module 8 Open Q&A |
 | ------------- | ---------------- |
 | 15:00 - 16:00 | _Breakout Session 2_ [Files for Breakout 2 TBA] |
 | ------------- | ---------------- |

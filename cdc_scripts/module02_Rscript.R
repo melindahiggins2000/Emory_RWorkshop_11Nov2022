@@ -92,10 +92,6 @@ data(penguins)
 # view the dataset - either click on object or
 View(penguins)
 
-# save the penguins dataset to a CSV file
-write.csv(penguins,
-          file = "penguins.csv")
-
 # SHUTTING DOWN SAVING WORKSPACE ==================
 # Take a look at the files in your Project folder
 # Now Click on File/Quit Session
@@ -119,41 +115,31 @@ sessionInfo()
 #
 # good practice to provide specific details
 
-# [OPTIONAL] SAVING and LOADING DATA =========================
+# SAVING and LOADING DATA =========================
 # Get data - abalone dataset
 # learn more at https://archive.ics.uci.edu/ml/datasets/abalone
 
 # import abalone.csv from local hard drive
 # file import dataset using base R
-abalone_csv_base <- 
-  read.csv("abalone.csv", stringsAsFactors=TRUE)
+abalone_csv_base <- read.csv("C:/MyGithub/CDC_Rworkshop_April2022/abalone.csv", stringsAsFactors=TRUE)
 
 # file import dataset using readr
 library(readr)
-abalone_csv_readr <- 
-  read_csv("abalone.csv")
+abalone_csv_readr <- read_csv("abalone.csv")
 
 # read abalone CSV file from the website
 # Load the abalone dataset using read_csv() function
 # from readr package
 library(readr)
-abalone_web <-
-  readr::read_csv(file = "https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data", 
-                  col_names = FALSE)
+abalone_web <- 
+  readr::read_csv(file = "https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data", col_names = FALSE)
 
 # put in the variables names
 # see details at https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.names
-names(abalone_web) <- c(
-  "sex",
-  "length",
-  "diameter",
-  "height",
-  "wholeWeight",
-  "shuckedWeight",
-  "visceraWeight",
-  "shellWeight",
-  "rings"
-)
+names(abalone_web) <- c("sex","length",
+                    "diameter","height",
+                    "wholeWeight","shuckedWeight",
+                    "visceraWeight","shellWeight","rings")
 
 # read in an EXCEL formatted file
 # this uses the readxl package
@@ -190,5 +176,3 @@ save(abalone_sas,
 
 # clear your workspace and read this back in
 load(file = "abalone_sas.RData")
-
-

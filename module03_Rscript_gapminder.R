@@ -1,40 +1,52 @@
 # MODULE 03 R Script ============================
 # EXERCISE 01: MAKE A SCATTERPLOT================
-library(palmerpenguins)
+library(gapminder)
+data(gapminder)
 library(ggplot2)
 
 # Make a scatterplot
-ggplot(penguins) + 
-  aes(x=bill_length_mm, 
-      y=bill_depth_mm, 
-      color = species) + 
+# set x = gdpPercap
+# set y = lifeExp
+# set color = continent
+# add labels for x-axis and y-axis
+# and add a title
+ggplot(gapminder) + 
+  aes(x=gdpPercap, 
+      y=lifeExp, 
+      color = continent) + 
   geom_point() +
-  xlab("Bill Length (mm)") +
-  ylab("Bill Depth (mm)") +
-  ggtitle("Penguins Bill Dimensions")
+  xlab("GDP per capita (US $)") +
+  ylab("Life Expectancy at Birth (yrs)") +
+  ggtitle("Life Expectancy by GDP PerCapita")
 
 # add a theme
-# Add axis labels and a title
-ggplot(penguins) + 
-  aes(x=bill_length_mm, 
-      y=bill_depth_mm,
-      color = species) + 
+# try theme_classic()
+# or theme_light()
+# see more by looking at help, type
+# help(theme_classic, package = "ggplot2")
+#
+# and change x=log10(gdpPercap)
+# to put GDP on a log base 10 scale
+ggplot(gapminder) + 
+  aes(x=log10(gdpPercap), 
+      y=lifeExp, 
+      color = continent) + 
   geom_point() +
-  xlab("Bill Length(mm)") + 
-  ylab("Bill Depth (mm)") + 
-  ggtitle("Penguins Bill Dimensions") +
-  theme_dark()
+  xlab("GDP per capita (US $) - Log10 transformed") +
+  ylab("Life Expectancy at Birth (yrs)") +
+  ggtitle("Life Expectancy by GDP PerCapita") +
+  theme_classic()
 
 # ggthemes OPTIONAL =========================
 library(ggthemes)
 
-ggplot(penguins) + 
-  aes(x=bill_length_mm, 
-      y=bill_depth_mm,
-      color = species) + 
+ggplot(gapminder) + 
+  aes(x=log10(gdpPercap), 
+      y=lifeExp, 
+      color = continent) + 
   geom_point() +
-  xlab("Bill Length(mm)") + 
-  ylab("Bill Depth (mm)") + 
+  xlab("GDP per capita (US $) - Log10 transformed") +
+  ylab("Life Expectancy at Birth (yrs)") +
   ggtitle("WSJ Theme") +
   theme_wsj()
 
@@ -42,13 +54,13 @@ ggplot(penguins) +
 library(ggthemr)
 
 ggthemr('pale')
-ggplot(penguins,
-       aes(x=bill_length_mm, 
-           y=bill_depth_mm,
-           colour = species)) + 
+ggplot(gapminder) + 
+  aes(x=log10(gdpPercap), 
+      y=lifeExp, 
+      color = continent) + 
   geom_point() +
-  xlab("Bill Length(mm)") + 
-  ylab("Bill Depth (mm)") + 
+  xlab("GDP per capita (US $) - Log10 transformed") +
+  ylab("Life Expectancy at Birth (yrs)") + 
   ggtitle("ggthemr - pale theme") +
   scale_colour_ggthemr_d()
 ggthemr_reset()
@@ -57,21 +69,26 @@ ggthemr_reset()
 # http://www.cookbook-r.com/Graphs/
 
 # Make a histogram with overlaid density curve
-# Look at flipper_length_mm
-# for Palmer Penguins
+# Look at pop (population) - do log10 transform
+# for the gapminder data
 # Histogram with density curve
 # Use y=..density..
 # Overlay with transparent density plot
-ggplot(penguins, 
-       aes(x=flipper_length_mm)) + 
+ggplot(gapminder, 
+       aes(x=log10(pop))) + 
   geom_histogram(aes(y=..density..),      
-                 binwidth=2,
+                 binwidth=0.2,
                  colour="black", 
                  fill="white") +
   geom_density(alpha=.2, 
                fill="#FF6666") 
 
 # EXERCISE 02 YOUR TURN ======================
+# work with the penguins dataset
+# from the palmerpenguins package
+library(palmerpenguins)
+data(penguins)
+
 # Fill in ___ Blanks below
 # Make a scatterplot of 
 # flipper_length_mm on Y-axis
@@ -86,6 +103,7 @@ ggplot(penguins) +
   ylab(___) +
   ggtitle(___)
 
+
 # EXERCISE 03 YOUR TURN ======================
 # go to http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/
 # redo the scatterplot above
@@ -93,7 +111,15 @@ ggplot(penguins) +
 # in addition to the colors
 # PUT YOUR CODE HERE
 
-
+ggplot(penguins) + 
+  aes(x=___, 
+      y=___, 
+      color = species,
+      shape = ___) + 
+  geom_point() +
+  xlab(___) +
+  ylab(___) +
+  ggtitle(___)
 
 
 # Break out by Facet/Panels ===================

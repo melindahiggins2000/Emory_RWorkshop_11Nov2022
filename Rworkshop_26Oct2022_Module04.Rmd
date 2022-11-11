@@ -1,6 +1,6 @@
 ---
 title: "Module 04: Data Wrangling with `dplyr`"
-subtitle: "mHealth Collaborative R Workshop Oct 26, 2022"
+subtitle: "Rollins COVID-19 Epidemiology Fellowship R Training: Nov 11, 2022"
 author: "[Melinda Higgins](https://melindahiggins.netlify.app/)"
 date: "Director Biostatistics & Data Core </br> School of Nursing - Emory University </br>"
 output:

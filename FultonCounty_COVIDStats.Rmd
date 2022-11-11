@@ -1,11 +1,381 @@
 ---
 title: "Fulton County COVID Stats"
 author: "Melinda Higgins"
-date: "2022-11-07"
-output: html_document
+date: "2022-11-11"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# set up knitr options
+# echo - show/hide code in report
+# error - set to TRUE keep knitting even if errors
+# error - set to FALSE to stop knitting on errors
+# message - FALSE turn off messages
+# warning - FALSE turn off warnings
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+
+# load packages
+library(dplyr)
+```
+
+# Report Overview
+
+add text here on what this report is for...
+
+## Fulton County COVID Data
+
+```{r}
+# read in the COVID data EXCEL file
+library(readxl)
+coviddat <- 
+  read_excel("FALSE COVID DATA_TRAINING.xlsx")
+
+# get number of cases
+n_covid <- dim(coviddat)[1]
+
+# get min and max dates
+mindate <- min(coviddat$reprt_creationdt_FALSE)
+maxdate <- max(coviddat$reprt_creationdt_FALSE)
+
+# learn about date formatting
+# https://epirhandbook.com/en/working-with-dates.html#date-display
+```
+
+The dataset has `r n_covid` COVID cases from mostly the Fulton County, GA area. These data cover COVID cases reported from `r format(mindate, format = "%B %Y")` to `r format(maxdate, format = "%B %Y")`.
+
+### Table of Demographics
+
+```{r}
+library(arsenal)
+
+tab1 <- 
+  tableby(~ case_age + case_gender +
+            case_race + case_eth, 
+          data=coviddat)
+```
+
+```{r results="asis"}
+summary(tab1)
+```
+
+### Table of symptoms
+
+```{r results="asis"}
+tab1 <- 
+  tableby(~ sym_fever + sym_subjfever + sym_myalgia +
+            sym_losstastesmell + sym_sorethroat +
+            sym_cough + sym_headache + sym_resolved, 
+          data=coviddat)
+
+summary(tab1)
+```
+
+## Clean up data and recode
+
+```{r}
+# recode race into
+# black, white and other
+# where other is the other races, unknowns and NAs (missing)
+coviddat <-
+  coviddat %>%
+  mutate(
+    case_race.c = case_when(
+      case_race == "BLACK" ~ "Black",
+      case_race == "WHITE" ~ "White",
+      is.na(case_race) ~ "Other, unknown or missing",
+      TRUE ~ "Other, unknown or missing"
+    )
+  )
+
+# also clean up some of the symptoms
+# keep yes and compare to no, unknown or NA missing
+# recode with case_when
+
+# sym_fever
+coviddat <-
+  coviddat %>%
+  mutate(
+    sym_fever.c = case_when(
+      sym_fever == "No" ~ "No, unk, na",
+      sym_fever == "Unk" ~ "No, unk, na",
+      sym_fever == "Yes" ~ "Yes",
+      is.na(sym_fever) ~ "No, unk, na",
+      TRUE ~ "No, unk, na"
+    )
+  )
+
+# sym_sorethroat
+coviddat <-
+  coviddat %>%
+  mutate(
+    sym_sorethroat.c = case_when(
+      sym_sorethroat == "No" ~ "No, unk, na",
+      sym_sorethroat == "Unk" ~ "No, unk, na",
+      sym_sorethroat == "Yes" ~ "Yes",
+      is.na(sym_sorethroat) ~ "No, unk, na",
+      TRUE ~ "No, unk, na"
+    )
+  )
+
+# sym_headache
+coviddat <-
+  coviddat %>%
+  mutate(
+    sym_headache.c = case_when(
+      sym_headache == "No" ~ "No, unk, na",
+      sym_headache == "Unk" ~ "No, unk, na",
+      sym_headache == "Yes" ~ "Yes",
+      is.na(sym_headache) ~ "No, unk, na",
+      TRUE ~ "No, unk, na"
+    )
+  )
+
+# sym_cough
+coviddat <-
+  coviddat %>%
+  mutate(
+    sym_cough.c = case_when(
+      sym_cough == "No" ~ "No, unk, na",
+      sym_cough == "Unk" ~ "No, unk, na",
+      sym_cough == "Yes" ~ "Yes",
+      is.na(sym_cough) ~ "No, unk, na",
+      TRUE ~ "No, unk, na"
+    )
+  )
+```
+
+### Table of some symptoms after recoding
+
+```{r results="asis"}
+tab1 <- 
+  tableby(~ sym_fever.c + sym_sorethroat.c +
+            sym_cough.c + sym_headache.c, 
+          data=coviddat)
+
+summary(tab1)
+```
+
+### Table of symptoms by race
+
+Let's also add some nicer labels and then make the table of these recoded symptoms by race.
+
+```{r results="asis"}
+attr(coviddat$case_race.c,'label')  <- 'Race'
+attr(coviddat$sym_cough.c,'label')  <- 'Cough'
+attr(coviddat$sym_fever.c,'label')  <- 'Fever'
+attr(coviddat$sym_headache.c,'label')  <- 'Headache'
+attr(coviddat$sym_sorethroat.c,'label')  <- 'Sore Throat'
+
+tab1 <- 
+  tableby(case_race.c~ sym_fever.c + sym_sorethroat.c +
+            sym_cough.c + sym_headache.c, 
+          test = FALSE,
+          data=coviddat)
+
+summary(tab1,
+        title = "Symptoms by race")
+```
+
+### Table of Symptoms by Race for People who Died
+
+```{r results = "asis"}
+coviddat.died <- 
+  coviddat %>%
+  filter(died == "Yes")
+  
+tab1 <- 
+  tableby(case_race.c~ sym_fever.c + sym_sorethroat.c +
+            sym_cough.c + sym_headache.c, 
+          test = FALSE,
+          data=coviddat.died)
+
+summary(tab1,
+        title = "Symptoms by race - people who died")
+```
+
+
+
+
+# Maps with points and markers
+
+intro to making maps with data points on them
+
+## Make a Map of Atanta with leaflet
+
+Learn more about the [`leaflet` package](https://rstudio.github.io/leaflet/).
+
+```{r}
+library(leaflet)
+library(dplyr)
+
+# Fulton County Lat Long
+# 33.8034° N, 84.3963° W
+
+m <- leaflet() %>% 
+  setView(lng = -84.3963, lat = 33.8034, zoom = 12)
+
+# add default open street map "tile"
+m %>% addTiles()
+```
+
+## add data to the map
+
+Let's look at the locations of the COVID deaths under review and color the points by gender.
+
+```{r}
+df1 <- coviddat %>%
+  filter(coviddat$died_covid == "Under Review") %>%
+  select(PID, case_gender,
+         latitude_JITT, longitude_JITT)
+
+# add some color by gender
+df1$colorgender <- 
+  ifelse(
+    df1$case_gender == "Female", "darkorange", 
+    "blue"
+  )
+
+# change zoom to 10 to zoom out a little (wider area)
+m2 <- leaflet(df1) %>% 
+  setView(lng = -84.3963, lat = 33.8034, zoom = 10) 
+
+m2 %>%
+  addTiles() %>%
+  addCircles(lng = ~longitude_JITT, 
+             lat = ~latitude_JITT,
+             color = ~colorgender)
+```
+
+## Change the base layer if wanted to simplier road map
+
+Learn more with basemaps at [https://rstudio.github.io/leaflet/basemaps.html](https://rstudio.github.io/leaflet/basemaps.html).
+
+```{r}
+m %>% addProviderTiles(providers$MtbMap) %>%
+  addProviderTiles(
+    providers$Stamen.TonerLines,
+    options = providerTileOptions(opacity = 0.35)
+    ) %>%
+  addProviderTiles(providers$Stamen.TonerLabels)
+```
+
+## Add some data to the map
+
+```{r}
+# change zoom back to 11 to zoom back in a little
+m2 <- leaflet(df1) %>% 
+  setView(lng = -84.3963, lat = 33.8034, zoom = 11)
+
+m2 %>% addProviderTiles(providers$MtbMap) %>%
+  addProviderTiles(
+    providers$Stamen.TonerLines,
+    options = providerTileOptions(opacity = 0.35)
+    ) %>%
+  addProviderTiles(providers$Stamen.TonerLabels) %>%
+  addCircles(lng = ~longitude_JITT, 
+             lat = ~latitude_JITT,
+             color = ~colorgender)
+```
+
+# Aggregating data
+
+info here on aggregating data by categories - like by zipcode
+
+then merge with the shapefile data for the Fulton County zipcodes
+
+and then we can make choropleth maps - maps with colored areas filled in to represent values or categories.
+
+## Load shapefiles for Fulton County Map
+
+Read in the SHP shapefile for Fulton County, GA using the `sf` package. Then plot the map.
+
+```{r}
+library(sf)
+fulton_sf <- 
+  sf::st_read(
+    "FultonCountyZipCodes/FultonCountyZipCodes.shp"
+    )
+
+plot(st_geometry(fulton_sf), 
+     main='Fulton County Geometry')
+```
+
+## pull data of interest and summarize by zipcode
+
+```{r}
+library(data.table)
+
+# see cough symptoms - how codes
+# what is missing or unknown
+# table(coviddat$sym_cough, useNA = "ifany")
+
+# # recode with case_when
+# coviddat <-
+#   coviddat %>%
+#   mutate(
+#     sym_cough.c = case_when(
+#       sym_cough == "No" ~ "No, unk, na",
+#       sym_cough == "Unk" ~ "No, unk, na",
+#       sym_cough == "Yes" ~ "Yes",
+#       is.na(sym_cough) ~ "No, unk, na",
+#       TRUE ~ "No, unk, na"
+#     )
+#   )
+
+# try data.table aggregation
+# do simple counts for now
+cough_zip <-
+  coviddat %>%
+  select(PID, case_zip, sym_cough, sym_cough.c)
+
+cough_zip <- as.data.table(cough_zip)
+#class(cough_zip)
+
+cough_zip$sym_cough.cnum <-
+  as.numeric(cough_zip$sym_cough.c == "Yes")
+
+# aggregate data using data.table functions
+cough_sum <- 
+  cough_zip[ , .(cough_sum = sum(sym_cough.c == "Yes")), 
+             by = "case_zip"]
+```
+
+
+## then merge and make a choropleth map
+
+```{r}
+# rname case_zip to ZipCode
+# and change to character
+cough_sum$ZipCode <- as.character(cough_sum$case_zip)
+
+fulton_sf_cough <- left_join(
+  fulton_sf, cough_sum, by="ZipCode"
+)
+
+# this uses library(sf)
+plot(fulton_sf_cough['cough_sum'], 
+     main='Number of People with Cough Reported')
+```
+
+## another map option with ggplot2
+
+```{r}
+# see colors and options
+# at https://r-spatial.github.io/sf/articles/sf5.html
+
+library(ggplot2)
+ggplot() + 
+  geom_sf(data = fulton_sf_cough, 
+          aes(fill = cough_sum)) + 
+  scale_y_continuous(n.breaks=20)
 ```
 
